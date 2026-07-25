@@ -54,4 +54,35 @@ Siga os passos abaixo para testar a aplicação em ambiente de desenvolvimento.
 
 1. Clone este repositório:
    ```bash
-   git clone [https://github.com/seu-usuario/elo-unicef-2026.git](https://github.com/seu-usuario/elo-unicef-2026.git)
+   git clone git@github.com:josiasdev/Elo.git
+   ```
+2. Acesse a pasta do projeto:
+   ```bash
+   cd Elo
+   ```
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+4. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+
+
+
+## 📄 Estrutura do Smart Contract
+O contrato inteligente do ELO foi desenhado com foco no minimalismo e na redução de custos de transação (Gas fees). Ele contém apenas o necessário para gravar o hash emitido pelo back-end na blockchain, atrelando-o à chave pública (wallet) do emissor e salvando a data exata da emissão.
+
+Endereço do Contrato na Sepolia: (Adicionar o endereço hash aqui após o deploy)
+
+## 📅 Road to 29/07
+- [x] Definição de Arquitetura e Stack
+- [ ] Setup e Deploy do Smart Contract na Sepolia
+- [ ] Construção do Back-end (APIs mockadas para ONGs do piloto)
+- [ ] Construção do Front-end (Mapa e Perfil do Jovem)
+- [ ] Integração E2E (Emissão de hash -> Gravação On-chain -> Leitura no Perfil)
+
+"Transformando a participação invisível de hoje na oportunidade documentada de amanhã."
+Desenvolvido pela Equipe ELO para o UNICEF Youth Challenge Blockchain 2026.
