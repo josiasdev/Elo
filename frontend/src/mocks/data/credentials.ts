@@ -1,0 +1,40 @@
+import type { Credential } from '@/features/civic-wallet/types/credential'
+
+export const mockCredentials: Credential[] = [
+  {
+    id: 'cred-demo-001',
+    participationId: 'part-demo-001',
+    issuerName: 'Casa Futuro Manaus',
+    activityTitle: 'Curso de cidadania digital',
+    issuedAt: '2026-09-15T13:00:00.000Z',
+    verificationStatus: 'verified',
+    visibility: 'private',
+    transactionHash: null,
+    credentialHash: 'mock-credential-hash-001',
+    isRevoked: false,
+  },
+  {
+    id: 'cred-demo-002',
+    participationId: 'part-demo-002',
+    issuerName: 'Rede Jovem Recife',
+    activityTitle: 'Oficina de rádio comunitária',
+    issuedAt: '2026-10-08T13:00:00.000Z',
+    verificationStatus: 'pending',
+    visibility: 'shared',
+    transactionHash: null,
+    credentialHash: 'mock-credential-hash-002',
+    isRevoked: false,
+  },
+  {
+    id: 'cred-demo-003',
+    participationId: 'part-demo-003',
+    issuerName: 'Laboratório Cívico Curitiba',
+    activityTitle: 'Mentoria em dados abertos',
+    issuedAt: '2026-11-18T13:00:00.000Z',
+    verificationStatus: 'pending',
+    visibility: 'private',
+    transactionHash: null,
+    credentialHash: 'mock-credential-hash-003',
+    isRevoked: false,
+  },
+]
