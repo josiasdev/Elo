@@ -1,0 +1,445 @@
+// Schema Prisma — EloCiv MVP
+// Baseado na Seção 7 do Documento Técnico de Requisitos
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// CATÁLOGO TERRITORIAL
+// ---------------------------------------------------------------------------
+
+model Municipality {
+  id     String @id // Código IBGE 7 dígitos
+  nome   String
+  uf     String // Sigla do estado (ex: "AM", "CE")
+  regiao String // "Norte", "Nordeste", etc.
+
+  // Relações
+  youngs        Young[]
+  opportunities Opportunity[]
+  institutions  InstitutionRegion[]
+
+  @@map("municipalities")
+}
+
+// ---------------------------------------------------------------------------
+// JOVEM
+// ---------------------------------------------------------------------------
+
+model Young {
+  id     String @id @default(uuid())
+  email  String @unique
+  // Apenas ano de nascimento — gera faixa etária (12-14, 15-17, 18+)
+  ano_nascimento   Int
+  municipio_id     String
+  municipio        Municipality @relation(fields: [municipio_id], references: [id])
+  interesses       String[]     // Array de categorias de oportunidade
+  apelido          String?      @unique // Slug da carteira pública (escolhido pelo jovem)
+  opt_in_comunicacao Json?      // Preferências por categoria (JSONB)
+  consentimento_em   DateTime
+  consentimento_versao String   @default("1.0")
+  status           YoungStatus  @default(PENDENTE_VERIFICACAO)
+  criado_em        DateTime     @default(now())
+  atualizado_em    DateTime     @updatedAt
+
+  // Relações
+  participations Participation[]
+  credentials    Credential[]
+  otpCodes       OtpCode[]
+  reports        Report[]
+
+  @@map("youngs")
+}
+
+enum YoungStatus {
+  PENDENTE_VERIFICACAO
+  ATIVO
+  INATIVO
+  SUSPENSO
+
+  @@map("young_status")
+}
+
+// ---------------------------------------------------------------------------
+// AUTENTICAÇÃO — OTP MOCK
+// ---------------------------------------------------------------------------
+
+model OtpCode {
+  id         String   @id @default(uuid())
+  email      String   // Pode ser young ou institution_user
+  code       String   // 6 dígitos
+  expires_at DateTime
+  attempts   Int      @default(0)
+  used       Boolean  @default(false)
+  criado_em  DateTime @default(now())
+
+  // Vínculo opcional com jovem (se já cadastrado)
+  young_id String?
+  young    Young?  @relation(fields: [young_id], references: [id])
+
+  @@map("otp_codes")
+}
+
+// ---------------------------------------------------------------------------
+// INSTITUIÇÃO
+// ---------------------------------------------------------------------------
+
+model Institution {
+  id           String              @id @default(uuid())
+  nome         String
+  cnpj         String?             @unique
+  categoria    InstitutionCategory
+  descricao    String
+  ods          Int[]               // ODS 1-17
+  responsavel_nome  String
+  responsavel_email String
+  responsavel_cargo String?
+  status_verificacao VerificationStatus @default(PENDENTE)
+  nivel_plano  PlanLevel           @default(GRATUITO)
+  aprovada_por String?             // FK para Admin.id
+  aprovada_em  DateTime?
+  motivo_decisao String?           // Motivo de rejeição ou complemento solicitado
+  criado_em    DateTime            @default(now())
+  atualizado_em DateTime           @updatedAt
+
+  // Relações
+  regions       InstitutionRegion[]
+  users         InstitutionUser[]
+  opportunities Opportunity[]
+  documents     InstitutionDocument[]
+  auditLogs     AuditLog[]
+
+  @@map("institutions")
+}
+
+enum InstitutionCategory {
+  ONG
+  COLETIVO_INFORMAL
+  ESCOLA
+  PODER_PUBLICO
+  INICIATIVA_EMPRESARIAL
+
+  @@map("institution_category")
+}
+
+enum VerificationStatus {
+  PENDENTE
+  EM_ANALISE
+  APROVADA
+  REJEITADA
+  SUSPENSA
+
+  @@map("verification_status")
+}
+
+enum PlanLevel {
+  GRATUITO
+  PREMIUM
+
+  @@map("plan_level")
+}
+
+// Regiões de atuação da instituição (muitos-para-muitos com Municipality)
+model InstitutionRegion {
+  institution_id String
+  municipio_id   String
+  institution    Institution  @relation(fields: [institution_id], references: [id])
+  municipio      Municipality @relation(fields: [municipio_id], references: [id])
+
+  @@id([institution_id, municipio_id])
+  @@map("institution_regions")
+}
+
+// Documentos comprobatórios armazenados localmente
+model InstitutionDocument {
+  id             String      @id @default(uuid())
+  institution_id String
+  institution    Institution @relation(fields: [institution_id], references: [id])
+  filename       String      // Nome original do arquivo
+  stored_path    String      // Caminho local em uploads/
+  mime_type      String
+  uploaded_em    DateTime    @default(now())
+
+  @@map("institution_documents")
+}
+
+// ---------------------------------------------------------------------------
+// USUÁRIO DA INSTITUIÇÃO
+// ---------------------------------------------------------------------------
+
+model InstitutionUser {
+  id             String      @id @default(uuid())
+  institution_id String
+  institution    Institution @relation(fields: [institution_id], references: [id])
+  email          String      @unique
+  nome           String
+  status         InstitutionUserStatus @default(ATIVO)
+  criado_em      DateTime    @default(now())
+
+  // Relações
+  confirmations Participation[] @relation("ConfirmedBy")
+
+  @@map("institution_users")
+}
+
+enum InstitutionUserStatus {
+  ATIVO
+  INATIVO
+
+  @@map("institution_user_status")
+}
+
+// ---------------------------------------------------------------------------
+// OPORTUNIDADE
+// ---------------------------------------------------------------------------
+
+model Opportunity {
+  id             String            @id @default(uuid())
+  institution_id String
+  institution    Institution       @relation(fields: [institution_id], references: [id])
+  titulo         String
+  descricao      String
+  tipo           OpportunityType
+  ods            Int[]
+  faixa_etaria_alvo FaixaEtaria
+  frequencia     Frequencia
+  data_inicio    DateTime?
+  data_fim       DateTime?
+  hora_inicio    String?           // Ex: "09:00"
+  modalidade     Modalidade
+  endereco       String?           // Se presencial
+  link_online    String?           // Se online
+  vagas          Int?              // Null = sem limite
+  ponto_contato  String            // Canal institucional (e-mail genérico, formulário)
+  municipio_id   String
+  municipio      Municipality      @relation(fields: [municipio_id], references: [id])
+  criterio_conclusao String?       // Para atividades contínuas
+  status         OpportunityStatus @default(RASCUNHO)
+  criado_em      DateTime          @default(now())
+  atualizado_em  DateTime          @updatedAt
+
+  // Relações
+  participations Participation[]
+
+  @@map("opportunities")
+}
+
+enum OpportunityType {
+  VOLUNTARIADO
+  ACAO_PONTUAL
+  GRUPO_DE_JOVENS
+  CURSO_PROFISSIONALIZANTE
+  CURSO_EDUCACIONAL
+  PALESTRA
+  OFICINA_TECNICA
+  FORMACAO_COMPLEMENTAR
+  OUTROS
+
+  @@map("opportunity_type")
+}
+
+enum FaixaEtaria {
+  DE_12_A_14
+  DE_15_A_17
+  DE_18
+  TODAS
+
+  @@map("faixa_etaria")
+}
+
+enum Frequencia {
+  PONTUAL
+  CONTINUA
+
+  @@map("frequencia")
+}
+
+enum Modalidade {
+  PRESENCIAL
+  ONLINE
+
+  @@map("modalidade")
+}
+
+enum OpportunityStatus {
+  RASCUNHO
+  EM_ANALISE
+  PUBLICADA
+  ENCERRADA
+  ARQUIVADA
+
+  @@map("opportunity_status")
+}
+
+// ---------------------------------------------------------------------------
+// PARTICIPAÇÃO
+// ---------------------------------------------------------------------------
+
+model Participation {
+  id             String             @id @default(uuid())
+  young_id       String
+  young          Young              @relation(fields: [young_id], references: [id])
+  opportunity_id String
+  opportunity    Opportunity        @relation(fields: [opportunity_id], references: [id])
+  status         ParticipationStatus @default(INTERESSE_REGISTRADO)
+  data_interesse DateTime           @default(now())
+  codigo_checkin String             @unique // 6 chars alfanumérico único
+  data_confirmacao DateTime?
+  confirmado_por_id String?
+  confirmado_por   InstitutionUser? @relation("ConfirmedBy", fields: [confirmado_por_id], references: [id])
+  credential_id    String?          @unique
+
+  // Relações
+  credential Credential?
+
+  // Um jovem só pode ter uma participação por oportunidade
+  @@unique([young_id, opportunity_id])
+  @@map("participations")
+}
+
+enum ParticipationStatus {
+  INTERESSE_REGISTRADO
+  CONFIRMADA_PELA_INSTITUICAO
+  CERTIFICADO_EMITIDO
+  NAO_COMPARECEU
+  CANCELADA
+
+  @@map("participation_status")
+}
+
+// ---------------------------------------------------------------------------
+// CREDENCIAL
+// ---------------------------------------------------------------------------
+
+model Credential {
+  id             String           @id @default(uuid())
+  participation_id String         @unique
+  participation  Participation    @relation(fields: [participation_id], references: [id])
+  young_id       String
+  young          Young            @relation(fields: [young_id], references: [id])
+  dados_credencial Json           // VC JSON sem dados pessoais identificáveis
+  hash_ancorado  String           @unique // SHA-256 hex 64 chars
+  tx_id          String?          // Transaction hash da Stellar
+  block_number   Int?             // Ledger number
+  emissor        String           // Endereço público do custodiante
+  visibilidade   Visibilidade     @default(PRIVADA)
+  status         CredentialStatus @default(ATIVA)
+  revogada_em    DateTime?
+  motivo_revogacao String?
+  emitida_em     DateTime         @default(now())
+  atualizado_em  DateTime         @updatedAt
+
+  @@map("credentials")
+}
+
+enum Visibilidade {
+  PUBLICA
+  PRIVADA
+
+  @@map("visibilidade")
+}
+
+enum CredentialStatus {
+  ATIVA
+  // Pendente quando a ancoragem Stellar ainda não foi confirmada
+  PENDENTE_ANCORAGEM
+  REVOGADA
+  EXPIRADA
+
+  @@map("credential_status")
+}
+
+// ---------------------------------------------------------------------------
+// ADMINISTRADOR
+// ---------------------------------------------------------------------------
+
+model Admin {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  nome      String
+  papel     AdminRole
+  status    AdminStatus @default(ATIVO)
+  criado_em DateTime  @default(now())
+
+  @@map("admins")
+}
+
+enum AdminRole {
+  ADMIN_MASTER
+  MODERADOR_DE_CONTEUDO
+  SUPORTE
+
+  @@map("admin_role")
+}
+
+enum AdminStatus {
+  ATIVO
+  INATIVO
+
+  @@map("admin_status")
+}
+
+// ---------------------------------------------------------------------------
+// AUDITORIA
+// ---------------------------------------------------------------------------
+
+model AuditLog {
+  id            String   @id @default(uuid())
+  ator_id       String   // UUID do ator (Admin, InstitutionUser, etc.)
+  ator_tipo     String   // "Admin" | "InstitutionUser"
+  acao          String   // Ex: "APPROVE_INSTITUTION", "CONFIRM_PARTICIPATION"
+  entidade_tipo String   // "Institution" | "Opportunity" | "Credential"
+  entidade_id   String
+  contexto      Json?    // Dados adicionais sem informações pessoais sensíveis
+  timestamp     DateTime @default(now())
+
+  // Relação opcional com instituição para facilitar queries
+  institution_id String?
+  institution    Institution? @relation(fields: [institution_id], references: [id])
+
+  @@map("audit_logs")
+}
+
+// ---------------------------------------------------------------------------
+// DENÚNCIA
+// ---------------------------------------------------------------------------
+
+model Report {
+  id          String       @id @default(uuid())
+  young_id    String
+  young       Young        @relation(fields: [young_id], references: [id])
+  alvo_tipo   String       // "Institution" | "Opportunity"
+  alvo_id     String
+  descricao   String
+  gravidade   ReportGravidade
+  status      ReportStatus @default(ABERTA)
+  tratamento  String?
+  criada_em   DateTime     @default(now())
+  resolvida_em DateTime?
+
+  @@map("reports")
+}
+
+enum ReportGravidade {
+  BAIXA
+  MEDIA
+  ALTA
+  CRITICA
+
+  @@map("report_gravidade")
+}
+
+enum ReportStatus {
+  ABERTA
+  EM_APURACAO
+  RESOLVIDA
+  ARQUIVADA
+
+  @@map("report_status")
+}
