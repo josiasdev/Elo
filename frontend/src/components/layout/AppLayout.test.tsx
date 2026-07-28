@@ -15,7 +15,9 @@ describe('AppLayout', () => {
     )
 
     expect(screen.getAllByText('EloCiv').length).toBeGreaterThan(0)
-    expect(screen.getByText('O elo da cidadania jovem')).toBeInTheDocument()
+    expect(
+      screen.getAllByText('A EloCiv ajuda você a encontrá-las').length,
+    ).toBeGreaterThan(0)
     expect(screen.getByRole('navigation')).toBeInTheDocument()
     expect(screen.getByText('Conteúdo teste')).toBeInTheDocument()
   })

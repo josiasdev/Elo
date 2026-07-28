@@ -1,10 +1,11 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { appRoutes } from '@/constants/routes'
 import { LoadingState } from '@/components/feedback/LoadingState'
 import { AppLayout } from '@/components/layout/AppLayout'
 
+const LandingPage = lazy(() => import('@/features/landing/pages/LandingPage'))
 const OpportunitiesPage = lazy(
   () => import('@/features/opportunities/pages/OpportunitiesPage'),
 )
@@ -30,37 +31,41 @@ export function AppRouter() {
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingState label="Carregando página" />}>
-        <AppLayout>
-          <Switch>
-            <Route exact path={appRoutes.home}>
-              <Redirect to={appRoutes.opportunities} />
-            </Route>
-            <Route exact path={appRoutes.opportunities}>
-              <OpportunitiesPage />
-            </Route>
-            <Route path={appRoutes.opportunityDetails}>
-              <OpportunityDetailsPage />
-            </Route>
-            <Route path={appRoutes.civicWallet}>
-              <CivicWalletPage />
-            </Route>
-            <Route path={appRoutes.youthProfile}>
-              <YouthProfilePage />
-            </Route>
-            <Route path={appRoutes.institutions}>
-              <InstitutionsPage />
-            </Route>
-            <Route path={appRoutes.territorialAnalytics}>
-              <TerritorialAnalyticsPage />
-            </Route>
-            <Route path={appRoutes.admin}>
-              <AdminPage />
-            </Route>
-            <Route>
-              <NotFoundPage />
-            </Route>
-          </Switch>
-        </AppLayout>
+        <Switch>
+          <Route exact path={appRoutes.home}>
+            <LandingPage />
+          </Route>
+          <Route>
+            <AppLayout>
+              <Switch>
+                <Route exact path={appRoutes.opportunities}>
+                  <OpportunitiesPage />
+                </Route>
+                <Route path={appRoutes.opportunityDetails}>
+                  <OpportunityDetailsPage />
+                </Route>
+                <Route path={appRoutes.civicWallet}>
+                  <CivicWalletPage />
+                </Route>
+                <Route path={appRoutes.youthProfile}>
+                  <YouthProfilePage />
+                </Route>
+                <Route path={appRoutes.institutions}>
+                  <InstitutionsPage />
+                </Route>
+                <Route path={appRoutes.territorialAnalytics}>
+                  <TerritorialAnalyticsPage />
+                </Route>
+                <Route path={appRoutes.admin}>
+                  <AdminPage />
+                </Route>
+                <Route>
+                  <NotFoundPage />
+                </Route>
+              </Switch>
+            </AppLayout>
+          </Route>
+        </Switch>
       </Suspense>
     </BrowserRouter>
   )

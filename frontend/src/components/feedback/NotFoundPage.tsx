@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-
+import { BrandButton } from '@/components/brand'
 import { appRoutes } from '@/constants/routes'
 
 export default function NotFoundPage() {
@@ -10,9 +9,9 @@ export default function NotFoundPage() {
       <p>
         O endereço acessado não corresponde a uma rota disponível no frontend do EloCiv.
       </p>
-      <Link className="button-link" to={appRoutes.opportunities}>
+      <BrandButton to={appRoutes.opportunities} variant="primary">
         Voltar para oportunidades
-      </Link>
+      </BrandButton>
     </section>
   )
 }

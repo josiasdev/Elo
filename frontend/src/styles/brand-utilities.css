@@ -1,0 +1,351 @@
+.brand-surface {
+  border: var(--elociv-border-width-default) solid var(--elociv-color-border-default);
+  border-radius: var(--elociv-radius-md);
+  background: var(--elociv-color-background-surface);
+  box-shadow: var(--elociv-shadow-subtle);
+}
+
+.brand-inverse {
+  color: var(--elociv-color-text-inverse);
+  background: var(--elociv-color-background-inverse);
+}
+
+.brand-muted-text {
+  color: var(--elociv-color-text-muted);
+}
+
+.brand-pattern-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.18;
+  overflow: hidden;
+}
+
+.brand-pattern-layer .connection-pattern {
+  position: absolute;
+  top: var(--elociv-spacing-8);
+  right: var(--elociv-spacing-4);
+}
+
+.brand-pattern-layer .hexagon-cluster {
+  position: absolute;
+  bottom: var(--elociv-spacing-8);
+  left: var(--elociv-spacing-4);
+}
+
+.brand-logo {
+  display: block;
+  width: min(12rem, 100%);
+  height: auto;
+  aspect-ratio: 543 / 286;
+  object-fit: contain;
+}
+
+.brand-logo--placeholder {
+  display: inline-flex;
+  min-width: 10.5rem;
+  align-items: center;
+  gap: var(--elociv-spacing-2);
+  border: var(--elociv-border-width-default) dashed var(--elociv-color-border-strong);
+  border-radius: var(--elociv-radius-md);
+  padding: calc(var(--elociv-spacing-2) * 0.8);
+  color: var(--elociv-color-text-primary);
+  background: var(--elociv-color-background-surface);
+}
+
+.brand-logo--negative.brand-logo--placeholder {
+  color: var(--elociv-color-text-inverse);
+  background: var(--elociv-color-background-inverse);
+  border-color: var(--elociv-color-text-inverse);
+}
+
+.brand-logo__placeholder-mark {
+  width: 2rem;
+  height: 1.75rem;
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  background: var(--elociv-color-primary-blue);
+}
+
+.brand-logo small,
+.brand-mark__tagline {
+  display: block;
+  color: var(--elociv-color-text-muted);
+  font-family: var(--elociv-font-body);
+  font-size: var(--elociv-font-size-caption);
+  font-weight: var(--elociv-font-weight-regular);
+}
+
+.brand-logo--negative small,
+.brand-mark--negative .brand-mark__tagline {
+  color: var(--elociv-color-text-inverse);
+}
+
+.brand-icon {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.brand-icon--placeholder {
+  display: inline-grid;
+  place-items: center;
+  border: var(--elociv-border-width-default) dashed var(--elociv-color-border-strong);
+  border-radius: var(--elociv-radius-md);
+  background: var(--elociv-color-background-surface);
+}
+
+.brand-icon--placeholder span {
+  width: 1.35rem;
+  height: 1.2rem;
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  background: var(--elociv-color-primary-blue);
+}
+
+.brand-icon--negative.brand-icon--placeholder {
+  background: var(--elociv-color-background-inverse);
+  border-color: var(--elociv-color-text-inverse);
+}
+
+.brand-mark {
+  display: inline-grid;
+  gap: var(--elociv-spacing-1);
+}
+
+.hexagon {
+  width: 2.5rem;
+  height: auto;
+  overflow: visible;
+}
+
+.hexagon polygon {
+  stroke: var(--elociv-color-status-outline);
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.hexagon--sm {
+  width: 1.5rem;
+}
+
+.hexagon--lg {
+  width: 3.5rem;
+}
+
+.hexagon--none polygon {
+  fill: var(--elociv-color-status-no-opportunity);
+}
+
+.hexagon--scarce polygon {
+  fill: var(--elociv-color-status-scarce-opportunity);
+}
+
+.hexagon--available polygon {
+  fill: var(--elociv-color-status-available-opportunity);
+}
+
+.hexagon-cluster {
+  display: grid;
+  width: 8rem;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: var(--elociv-spacing-1);
+  opacity: 0.92;
+}
+
+.hexagon-cluster .hexagon:nth-child(1) {
+  grid-column: 2;
+}
+
+.hexagon-cluster .hexagon:nth-child(2) {
+  grid-column: 1;
+}
+
+.hexagon-cluster .hexagon:nth-child(3) {
+  grid-column: 3;
+}
+
+.hexagon-cluster .hexagon:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.hexagon-cluster .hexagon:nth-child(5) {
+  grid-column: 4;
+}
+
+.connection-pattern {
+  width: min(26rem, 100%);
+  height: auto;
+  overflow: visible;
+}
+
+.connection-pattern__line {
+  fill: none;
+  stroke: var(--elociv-color-contrast-plum);
+  stroke-width: 4;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.connection-pattern__line--dashed {
+  stroke-dasharray: 10 12;
+}
+
+.connection-pattern__node {
+  fill: var(--elociv-color-background-surface);
+  stroke: var(--elociv-color-contrast-navy);
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.opportunity-status {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: var(--elociv-spacing-2);
+  border: var(--elociv-border-width-default) solid var(--elociv-color-border-strong);
+  border-radius: var(--elociv-radius-pill);
+  padding: var(--elociv-spacing-1) var(--elociv-spacing-2);
+  color: var(--elociv-color-status-text);
+  background: var(--elociv-color-background-surface);
+  font-size: var(--elociv-font-size-body-small);
+  font-weight: var(--elociv-font-weight-bold);
+}
+
+.opportunity-status .hexagon {
+  width: 1.25rem;
+}
+
+.opportunity-status__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--elociv-spacing-2);
+}
+
+.opportunity-status__detail {
+  min-width: 1.75rem;
+  border-radius: var(--elociv-radius-pill);
+  padding: 0 var(--elociv-spacing-1);
+  text-align: center;
+  background: var(--elociv-color-background-surface-raised);
+}
+
+.brand-section-heading {
+  display: grid;
+  max-width: 47.5rem;
+  gap: var(--elociv-spacing-2);
+}
+
+.brand-heading {
+  margin: 0;
+  color: var(--elociv-color-text-primary);
+  font-size: var(--elociv-font-size-heading-1);
+  font-weight: var(--elociv-font-weight-black);
+  line-height: var(--elociv-line-height-tight);
+}
+
+.brand-section-heading__description {
+  color: var(--elociv-color-text-primary);
+  font-size: var(--elociv-font-size-body-large);
+}
+
+.brand-section-heading__supporting {
+  color: var(--elociv-color-text-muted);
+}
+
+.brand-badge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border: var(--elociv-border-width-default) solid var(--elociv-color-border-strong);
+  border-radius: var(--elociv-radius-pill);
+  padding: var(--elociv-spacing-1) var(--elociv-spacing-2);
+  color: var(--elociv-color-text-primary);
+  font-size: var(--elociv-font-size-label);
+  font-weight: var(--elociv-font-weight-bold);
+  letter-spacing: var(--elociv-letter-spacing-label);
+  text-transform: uppercase;
+}
+
+.brand-badge--blue {
+  background: var(--elociv-color-primary-blue);
+}
+
+.brand-badge--yellow {
+  background: var(--elociv-color-support-yellow);
+}
+
+.brand-badge--pink {
+  background: var(--elociv-color-support-pink);
+}
+
+.brand-badge--plum {
+  color: var(--elociv-color-text-inverse);
+  background: var(--elociv-color-contrast-plum);
+}
+
+.brand-button {
+  display: inline-flex;
+  min-height: var(--elociv-control-height);
+  align-items: center;
+  justify-content: center;
+  border: var(--elociv-border-width-strong) solid var(--elociv-color-border-strong);
+  border-radius: var(--elociv-radius-md);
+  padding: var(--elociv-spacing-2) var(--elociv-spacing-4);
+  color: var(--elociv-color-action-primary-text);
+  font-size: var(--elociv-font-size-button);
+  font-weight: var(--elociv-font-weight-bold);
+  text-decoration: none;
+  transition:
+    transform var(--elociv-transition-fast),
+    background var(--elociv-transition-fast),
+    opacity var(--elociv-transition-fast);
+}
+
+.brand-button:hover {
+  transform: translateY(-1px);
+}
+
+.brand-button:disabled,
+.brand-button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: var(--elociv-opacity-disabled);
+  transform: none;
+}
+
+.brand-button--primary {
+  background: var(--elociv-color-action-primary);
+}
+
+.brand-button--secondary {
+  background: var(--elociv-color-action-secondary);
+}
+
+.brand-button--ghost {
+  background: var(--elociv-color-background-surface);
+}
+
+.brand-card {
+  display: grid;
+  gap: var(--elociv-spacing-3);
+  border: var(--elociv-border-width-default) solid var(--elociv-color-border-default);
+  border-radius: var(--elociv-radius-md);
+  padding: var(--elociv-card-padding);
+  background: var(--elociv-color-background-surface);
+  box-shadow: var(--elociv-shadow-subtle);
+}
+
+.brand-card--blue {
+  background: var(--elociv-color-background-surface-raised);
+}
+
+.brand-card--yellow {
+  background: var(--elociv-color-support-yellow);
+}
+
+.brand-card--pink {
+  background: var(--elociv-color-support-pink);
+}

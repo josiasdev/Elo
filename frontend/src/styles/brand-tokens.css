@@ -1,0 +1,118 @@
+:root {
+  /* Official raw EloCiv colors from the identity guide. */
+  --elociv-color-support-yellow: #F4DC67;
+  --elociv-color-support-pink: #EDA9C2;
+  --elociv-color-primary-blue: #8DD8F0;
+  --elociv-color-contrast-navy: #20283A;
+  --elociv-color-contrast-plum: #69475F;
+  --elociv-color-base-ivory: #FFFDF7;
+
+  --elociv-rgb-support-yellow: 244 220 103;
+  --elociv-rgb-support-pink: 237 169 194;
+  --elociv-rgb-primary-blue: 141 216 240;
+  --elociv-rgb-contrast-navy: 32 40 58;
+  --elociv-rgb-contrast-plum: 105 71 95;
+  --elociv-rgb-base-ivory: 255 253 247;
+
+  /* Semantic interface colors mapped from official colors. */
+  --elociv-color-background-canvas: var(--elociv-color-base-ivory);
+  --elociv-color-background-surface: var(--elociv-color-base-ivory);
+  --elociv-color-background-surface-raised: rgb(var(--elociv-rgb-primary-blue) / 0.16);
+  --elociv-color-background-inverse: var(--elociv-color-contrast-navy);
+  --elociv-color-background-accent: var(--elociv-color-primary-blue);
+  --elociv-color-background-support: var(--elociv-color-support-yellow);
+  --elociv-color-text-primary: var(--elociv-color-contrast-navy);
+  --elociv-color-text-inverse: var(--elociv-color-base-ivory);
+  --elociv-color-text-muted: var(--elociv-color-contrast-plum);
+  --elociv-color-text-accent: var(--elociv-color-contrast-plum);
+  --elociv-color-border-default: rgb(var(--elociv-rgb-contrast-navy) / 0.18);
+  --elociv-color-border-strong: var(--elociv-color-contrast-navy);
+  --elociv-color-border-accent: var(--elociv-color-primary-blue);
+  --elociv-color-action-primary: var(--elociv-color-primary-blue);
+  --elociv-color-action-primary-text: var(--elociv-color-contrast-navy);
+  --elociv-color-action-secondary: var(--elociv-color-support-yellow);
+  --elociv-color-action-secondary-text: var(--elociv-color-contrast-navy);
+  --elociv-color-action-disabled: rgb(var(--elociv-rgb-contrast-navy) / 0.34);
+  --elociv-color-status-no-opportunity: transparent;
+  --elociv-color-status-scarce-opportunity: var(--elociv-color-support-pink);
+  --elociv-color-status-available-opportunity: var(--elociv-color-primary-blue);
+  --elociv-color-status-outline: var(--elociv-color-contrast-navy);
+  --elociv-color-status-text: var(--elociv-color-contrast-navy);
+  --elociv-color-focus-ring: var(--elociv-color-contrast-navy);
+  --elociv-color-shadow: rgb(var(--elociv-rgb-contrast-navy) / 0.12);
+  --elociv-color-overlay: rgb(var(--elociv-rgb-contrast-navy) / 0.72);
+
+  --elociv-font-heading: 'Sifonn', 'League Spartan', sans-serif;
+  --elociv-font-body: 'Nunito Sans', 'DM Sans', sans-serif;
+
+  --elociv-font-size-display: clamp(2.5rem, 8vw, 4.5rem);
+  --elociv-font-size-heading-1: clamp(2rem, 5vw, 3rem);
+  --elociv-font-size-heading-2: clamp(1.5rem, 3vw, 2rem);
+  --elociv-font-size-heading-3: 1.25rem;
+  --elociv-font-size-subtitle: clamp(1.125rem, 2vw, 1.5rem);
+  --elociv-font-size-body-large: 1.125rem;
+  --elociv-font-size-body: 1rem;
+  --elociv-font-size-body-small: 0.875rem;
+  --elociv-font-size-caption: 0.75rem;
+  --elociv-font-size-button: 0.95rem;
+  --elociv-font-size-navigation: 0.95rem;
+  --elociv-font-size-label: 0.78rem;
+
+  --elociv-font-weight-regular: 400;
+  --elociv-font-weight-semibold: 650;
+  --elociv-font-weight-bold: 750;
+  --elociv-font-weight-black: 850;
+  --elociv-line-height-tight: 1.08;
+  --elociv-line-height-heading: 1.2;
+  --elociv-line-height-body: 1.6;
+  --elociv-letter-spacing-default: 0;
+  --elociv-letter-spacing-label: 0.08em;
+
+  --elociv-spacing-1: 0.25rem;
+  --elociv-spacing-2: 0.5rem;
+  --elociv-spacing-3: 0.75rem;
+  --elociv-spacing-4: 1rem;
+  --elociv-spacing-6: 1.5rem;
+  --elociv-spacing-8: 2rem;
+  --elociv-spacing-12: 3rem;
+  --elociv-spacing-16: 4rem;
+
+  --elociv-radius-sm: 0.35rem;
+  --elociv-radius-md: 0.5rem;
+  --elociv-radius-lg: 0.75rem;
+  --elociv-radius-pill: 999px;
+  --elociv-border-width-default: 1px;
+  --elociv-border-width-strong: 2px;
+  --elociv-focus-ring-width: 3px;
+  --elociv-focus-ring-offset: 3px;
+  --elociv-shadow-card: 0 0.75rem 2rem var(--elociv-color-shadow);
+  --elociv-shadow-subtle: 0 1px 2px var(--elociv-color-shadow);
+  --elociv-opacity-disabled: 0.52;
+  --elociv-z-header: 20;
+  --elociv-z-overlay: 40;
+  --elociv-breakpoint-sm: 40rem;
+  --elociv-breakpoint-md: 48rem;
+  --elociv-breakpoint-lg: 64rem;
+  --elociv-transition-fast: 160ms ease;
+  --elociv-transition-base: 220ms ease;
+  --elociv-content-max-width: 73.75rem;
+  --elociv-page-horizontal-padding: clamp(1rem, 4vw, 2.5rem);
+  --elociv-section-gap: var(--elociv-spacing-8);
+  --elociv-card-padding: var(--elociv-spacing-4);
+  --elociv-header-height: 5rem;
+  --elociv-control-height: 2.75rem;
+}
+
+@theme {
+  --color-elociv-support-yellow: var(--elociv-color-support-yellow);
+  --color-elociv-support-pink: var(--elociv-color-support-pink);
+  --color-elociv-primary-blue: var(--elociv-color-primary-blue);
+  --color-elociv-contrast-navy: var(--elociv-color-contrast-navy);
+  --color-elociv-contrast-plum: var(--elociv-color-contrast-plum);
+  --color-elociv-base-ivory: var(--elociv-color-base-ivory);
+  --font-elociv-heading: var(--elociv-font-heading);
+  --font-elociv-body: var(--elociv-font-body);
+  --radius-elociv-sm: var(--elociv-radius-sm);
+  --radius-elociv-md: var(--elociv-radius-md);
+  --radius-elociv-lg: var(--elociv-radius-lg);
+}

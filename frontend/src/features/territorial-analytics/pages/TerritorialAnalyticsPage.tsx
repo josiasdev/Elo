@@ -1,10 +1,26 @@
 import { useEffect, useState } from 'react'
 
+import { OpportunityStatus } from '@/components/brand'
 import { LoadingState } from '@/components/feedback/LoadingState'
 import { PageIntro } from '@/components/ui/PageIntro'
 import { territorialAnalyticsService } from '@/features/territorial-analytics/services/territorialAnalyticsService'
 import type { TerritoryMetric } from '@/features/territorial-analytics/types/territoryMetric'
 import { formatSdgs } from '@/lib/formatters'
+import type { OpportunityAvailability } from '@/theme'
+
+function getOpportunityAvailability(
+  activeOpportunities: number,
+): OpportunityAvailability {
+  if (activeOpportunities === 0) {
+    return 'none'
+  }
+
+  if (activeOpportunities <= 5) {
+    return 'scarce'
+  }
+
+  return 'available'
+}
 
 export default function TerritorialAnalyticsPage() {
   const [metrics, setMetrics] = useState<TerritoryMetric[]>([])
@@ -41,6 +57,7 @@ export default function TerritorialAnalyticsPage() {
               <tr>
                 <th scope="col">Território</th>
                 <th scope="col">Oportunidades ativas</th>
+                <th scope="col">Status</th>
                 <th scope="col">Jovens registrados</th>
                 <th scope="col">Densidade</th>
                 <th scope="col">ODS cobertos</th>
@@ -53,6 +70,11 @@ export default function TerritorialAnalyticsPage() {
                     {metric.city} ({metric.state})
                   </th>
                   <td>{metric.activeOpportunities}</td>
+                  <td>
+                    <OpportunityStatus
+                      status={getOpportunityAvailability(metric.activeOpportunities)}
+                    />
+                  </td>
                   <td>{metric.registeredYouth}</td>
                   <td>{metric.opportunityDensity.toFixed(1)}</td>
                   <td>{formatSdgs(metric.coveredSdgs)}</td>

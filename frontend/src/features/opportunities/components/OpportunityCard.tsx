@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 
+import { BrandBadge, BrandCard } from '@/components/brand'
 import {
   opportunityFrequencyLabels,
   opportunityModalityLabels,
@@ -16,10 +17,10 @@ interface OpportunityCardProps {
 
 export function OpportunityCard({ opportunity }: OpportunityCardProps) {
   return (
-    <article className="data-card">
+    <BrandCard className="data-card">
       <div className="data-card__header">
         <div>
-          <p className="eyebrow">{opportunityTypeLabels[opportunity.type]}</p>
+          <BrandBadge tone="blue">{opportunityTypeLabels[opportunity.type]}</BrandBadge>
           <h2>{opportunity.title}</h2>
         </div>
         <span className={clsx('status-pill', `status-pill--${opportunity.status}`)}>
@@ -62,6 +63,6 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
       <Link className="text-link" to={`/oportunidades/${opportunity.id}`}>
         Ver detalhes
       </Link>
-    </article>
+    </BrandCard>
   )
 }

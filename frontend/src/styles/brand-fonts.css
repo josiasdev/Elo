@@ -1,0 +1,27 @@
+:root {
+  font-family: var(--elociv-font-body);
+  font-synthesis: none;
+  line-height: var(--elociv-line-height-body);
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.app-header__name,
+.app-navigation__link,
+.brand-heading,
+.brand-button,
+.brand-badge,
+.status-pill {
+  font-family: var(--elociv-font-heading);
+  letter-spacing: var(--elociv-letter-spacing-default);
+}
+
+body {
+  font-family: var(--elociv-font-body);
+  font-size: var(--elociv-font-size-body);
+}
