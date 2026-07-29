@@ -1,5 +1,7 @@
 # EloCiv — O Elo da Cidadania Jovem
 
+<img src="frontend/public/brand/logos/logo-principal.png" alt="EloCiv Logo" width="350" style="margin-bottom: 20px;" />
+
 ## Sobre o desafio
 Projeto oficial submetido ao desafio **UNICEF Youth Challenge Blockchain 2026**.
 
