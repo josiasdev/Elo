@@ -95,6 +95,31 @@ function ageRangesOverlap(opportunityAgeRange: string, selectedAgeRange: string)
   )
 }
 
+function getInitialStateFilter() {
+  const uf = new URLSearchParams(window.location.search)
+    .get('estado')
+    ?.toUpperCase()
+
+  if (!uf) {
+    return ''
+  }
+
+  return (
+    opportunities.find((opportunity) => opportunity.stateAbbreviation === uf)
+      ?.state ?? ''
+  )
+}
+
+function getInitialModalityFilter() {
+  const modality = new URLSearchParams(window.location.search).get('modalidade')
+
+  return opportunityModalities.includes(
+    modality as (typeof opportunityModalities)[number],
+  )
+    ? (modality ?? '')
+    : ''
+}
+
 function FilterSelect({
   id,
   label,
@@ -266,8 +291,8 @@ function OpportunityCard({ opportunity }: { opportunity: Opportunity }) {
 export function OpportunitiesPage() {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
-  const [modality, setModality] = useState('')
-  const [state, setState] = useState('')
+  const [modality, setModality] = useState(getInitialModalityFilter)
+  const [state, setState] = useState(getInitialStateFilter)
   const [ageRange, setAgeRange] = useState('')
 
   const hasActiveFilters =
@@ -368,6 +393,22 @@ export function OpportunitiesPage() {
                 comunitárias para jovens. Use os filtros para encontrar
                 experiências alinhadas ao seu território e aos seus interesses.
               </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="/oportunidades/mapa"
+                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border-2 border-elociv-navy px-5 text-sm font-heading font-bold text-elociv-navy transition-colors hover:bg-elociv-navy hover:text-elociv-ivory focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-fit"
+                >
+                  Ver mapa de oportunidades
+                  <MapPin className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <a
+                  href="/carteira-civica"
+                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-elociv-navy px-5 text-sm font-heading font-bold text-elociv-ivory shadow-md transition-colors hover:bg-elociv-navy/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-fit"
+                >
+                  Ver carteira cívica
+                  <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
             </div>
 
             <Card variant="surface" className="p-5">

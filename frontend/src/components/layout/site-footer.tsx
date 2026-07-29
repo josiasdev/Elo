@@ -72,6 +72,14 @@ export function SiteFooter() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/carteira-civica"
+                  className="inline-block py-1 text-elociv-ivory/85 hover:text-elociv-yellow transition-colors cursor-pointer"
+                >
+                  Carteira cívica
+                </a>
+              </li>
             </ul>
             <a
               href={footer.social.href}

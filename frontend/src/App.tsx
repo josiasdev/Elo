@@ -14,10 +14,12 @@ import { opportunities } from '@/data/opportunities'
 import { OpportunitiesPage, OpportunityDetailPage } from '@/pages/OpportunitiesPage'
 import { CredentialPage } from '@/pages/CredentialPage'
 import { CivicWalletPage } from '@/pages/CivicWalletPage'
+import { OpportunitiesMapPage } from '@/pages/OpportunitiesMapPage'
 
 type AppRoute =
   | { kind: 'home' }
   | { kind: 'opportunities' }
+  | { kind: 'opportunities-map' }
   | { kind: 'civic-wallet' }
   | { kind: 'opportunity-detail'; slug: string }
   | { kind: 'credential-detail'; slug: string }
@@ -27,6 +29,10 @@ function getCurrentRoute(): AppRoute {
 
   if (pathname === '/oportunidades') {
     return { kind: 'opportunities' }
+  }
+
+  if (pathname === '/oportunidades/mapa') {
+    return { kind: 'opportunities-map' }
   }
 
   if (pathname === '/carteira-civica') {
@@ -78,10 +84,50 @@ export default function App() {
   const route = getCurrentRoute()
 
   useEffect(() => {
+    if (route.kind !== 'home' || !window.location.hash) {
+      return
+    }
+
+    const targetId = decodeURIComponent(window.location.hash.replace(/^#/, ''))
+
+    const animationFrame = window.requestAnimationFrame(() => {
+      const target = document.getElementById(targetId)
+
+      if (!target) {
+        return
+      }
+
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches
+
+      target.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start',
+      })
+      window.history.replaceState(
+        null,
+        '',
+        window.location.pathname + window.location.search,
+      )
+    })
+
+    return () => window.cancelAnimationFrame(animationFrame)
+  }, [route.kind])
+
+  useEffect(() => {
     if (route.kind === 'opportunities') {
       document.title = 'Oportunidades — EloCiv'
       setMetaDescription(
         'Explore cursos, oficinas, mentorias, voluntariado e ações comunitárias para jovens na plataforma EloCiv.',
+      )
+      return
+    }
+
+    if (route.kind === 'opportunities-map') {
+      document.title = 'Mapa de Oportunidades — EloCiv'
+      setMetaDescription(
+        'Explore oportunidades presenciais e remotas em uma visualização territorial demonstrativa da plataforma EloCiv.',
       )
       return
     }
@@ -127,6 +173,7 @@ export default function App() {
       <main className="flex-1">
         {route.kind === 'home' && <HomePage />}
         {route.kind === 'opportunities' && <OpportunitiesPage />}
+        {route.kind === 'opportunities-map' && <OpportunitiesMapPage />}
         {route.kind === 'civic-wallet' && <CivicWalletPage />}
         {route.kind === 'opportunity-detail' && (
           <OpportunityDetailPage slug={route.slug} />

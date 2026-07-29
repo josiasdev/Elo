@@ -9,6 +9,7 @@ export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
   const { links, cta } = homeContent.header
   const isHomePage = window.location.pathname === '/'
+  const walletHref = '/carteira-civica'
 
   const toggleMenu = () => setMobileMenuOpen((prev) => !prev)
   const closeMenu = () => setMobileMenuOpen(false)
@@ -45,9 +46,9 @@ export function SiteHeader() {
       <Container className="flex h-20 items-center justify-between gap-4">
         {/* Logo à esquerda com rolagem para o início sem # no URL */}
         <a
-          href={isHomePage ? '#inicio' : '/'}
+          href={isHomePage ? '#inicio' : '/#inicio'}
           onClick={(e) =>
-            handleNavigation(e, isHomePage ? '#inicio' : '/', closeMenu)
+            handleNavigation(e, isHomePage ? '#inicio' : '/#inicio', closeMenu)
           }
           className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary rounded-lg transition-transform hover:scale-[1.01]"
         >
@@ -75,9 +76,15 @@ export function SiteHeader() {
         </nav>
 
         {/* CTA Destacado no Desktop */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center gap-3">
           <a
-            href={cta.href}
+            href={walletHref}
+            className="inline-flex h-11 items-center justify-center rounded-xl border-2 border-elociv-navy px-5 text-sm font-heading font-semibold text-elociv-navy transition-colors hover:bg-elociv-navy hover:text-elociv-ivory focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            Carteira cívica
+          </a>
+          <a
+            href={getNavigationHref(cta.href)}
             onClick={(e) => handleNavigation(e, cta.href)}
             className="inline-flex h-11 items-center justify-center rounded-xl bg-elociv-navy px-6 text-sm font-heading font-semibold text-elociv-ivory shadow-md transition-all hover:bg-elociv-navy/90 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-[0.98]"
           >
@@ -121,7 +128,14 @@ export function SiteHeader() {
               ))}
               <li className="pt-3 border-t border-border/60">
                 <a
-                  href={cta.href}
+                  href={walletHref}
+                  onClick={closeMenu}
+                  className="mb-3 inline-flex h-12 w-full items-center justify-center rounded-xl border-2 border-elociv-navy px-6 text-base font-heading font-semibold text-elociv-navy transition-colors hover:bg-elociv-navy hover:text-elociv-ivory focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  Carteira cívica
+                </a>
+                <a
+                  href={getNavigationHref(cta.href)}
                   onClick={(e) => handleNavigation(e, cta.href, closeMenu)}
                   className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-elociv-navy px-6 text-base font-heading font-semibold text-elociv-ivory shadow-md transition-all hover:bg-elociv-navy/90 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-[0.98]"
                 >
