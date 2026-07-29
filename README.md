@@ -157,7 +157,10 @@ Em conformidade com as diretrizes do desafio, declaramos que ferramentas de IA g
 
 ## Equipe
 
-| Membro | Foco |
-|---|---|
-| <img src="https://github.com/josiasdev.png" width="50" style="border-radius:50%"/><br/>**[Josias](https://github.com/josiasdev)** | Desenvolvimento, Backend, Smart Contracts e Arquitetura |
-| <img src="https://github.com/timoteobentes.png" width="50" style="border-radius:50%"/><br/>**[Timóteo](https://github.com/timoteobentes)** | Desenvolvimento, Frontend, interface |
+| Membro | Função / Foco | LinkedIn |
+|---|---|---|
+| **Stephani Domenighi** | Liderança e Coordenação | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/stephani-domenighi-565309258) |
+| <img src="https://github.com/josiasdev.png" width="40" style="border-radius:50%"/><br/>**[Francisco Josias Batista](https://github.com/josiasdev)** | Desenvolvimento e Arquitetura | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/josias-batista/) |
+| <img src="https://github.com/timoteobentes.png" width="40" style="border-radius:50%"/><br/>**[Timóteo Bentes](https://github.com/timoteobentes)** | Desenvolvimento e Interface | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/timoteo-bentes/) |
+| **Michelle Xie** | Marketing e Suporte | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michelle-ruixin-xie/) |
+| **Ana Azevedo** | Documentação e Conteúdo | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anaeduardatsa) |
