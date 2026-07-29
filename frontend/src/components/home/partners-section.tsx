@@ -23,34 +23,28 @@ export function PartnersSection() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6">
           {partners.items.map((partner) => (
             <Card
               key={partner.name}
               variant="default"
-              className="min-h-56 bg-background border-2 border-elociv-navy/15 p-0"
+              className="min-h-36 bg-background border-2 border-elociv-navy/15 p-0 transition-all hover:border-elociv-navy/40 hover:shadow-md"
             >
               <a
                 href={partner.url}
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-full min-h-56 flex-col items-center justify-center gap-5 p-7 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="flex h-full min-h-36 flex-col items-center justify-center p-4 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 aria-label={`Abrir site de ${partner.name} em nova aba`}
               >
-                <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-elociv-ivory p-4">
+                <div className="flex h-20 w-full items-center justify-center rounded-xl bg-elociv-ivory p-3">
                   <img
                     src={partner.logo}
                     alt={`Logo ${partner.name}`}
-                    className="max-h-32 w-full object-contain"
+                    className="max-h-16 w-full object-contain"
                     loading="lazy"
                   />
                 </div>
-                {/* <div className="flex items-center justify-center gap-2 text-elociv-navy">
-                  <h3 className="text-xl sm:text-2xl font-heading font-bold leading-tight">
-                    {partner.name}
-                  </h3>
-                  <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
-                </div> */}
               </a>
             </Card>
           ))}

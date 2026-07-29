@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120">
+  <text x="10" y="75" font-family="League Spartan, sans-serif" font-weight="900" font-size="70" fill="#0092DD" letter-spacing="-2">TETO</text>
+  <circle cx="240" cy="52" r="38" fill="#0092DD"/>
+  <path d="M240 28 L218 52 H231 V74 H249 V52 H262 Z" fill="#FFFFFF"/>
+  <text x="210" y="106" font-family="Nunito Sans, sans-serif" font-weight="800" font-size="16" fill="#0092DD" letter-spacing="3">TECHO</text>
+</svg>

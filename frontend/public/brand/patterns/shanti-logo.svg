@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#B36939" stroke-width="7"/>
+  <text x="100" y="102" font-family="League Spartan, sans-serif" font-weight="700" font-size="34" fill="#B36939" text-anchor="middle">Shanti</text>
+  <text x="100" y="128" font-family="Nunito Sans, sans-serif" font-weight="600" font-size="14" letter-spacing="4" fill="#C28459" text-anchor="middle">BRASIL</text>
+</svg>

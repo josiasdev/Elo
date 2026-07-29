@@ -257,19 +257,34 @@ export const homeContent = {
       'O EloCiv cresce por meio da colaboração entre organizações comprometidas com juventude, educação, participação cidadã, inovação e desenvolvimento territorial.',
     items: [
       {
+        name: 'Shanti Brasil',
+        url: 'https://shantibrasil.org.br',
+        logo: '/brand/patterns/shanti-logo.svg',
+      },
+      {
+        name: 'TETO Brasil',
+        url: 'https://teto.org.br',
+        logo: '/brand/patterns/teto-logo.svg',
+      },
+      {
+        name: 'IIRes da Amazônia',
+        url: 'https://iiresamazonia.org.br',
+        logo: '/brand/patterns/iires-logo.png',
+      },
+      {
+        name: 'Instituto Filadélfia',
+        url: 'https://www.institutofiladelfia.org.br',
+        logo: '/brand/patterns/filadelfia-logo.png',
+      },
+      {
         name: 'Interact Brasil',
         url: 'https://interactbrasil.org.br',
         logo: '/brand/patterns/interact-logo.png',
       },
       {
-        name: 'Instituto de Inovação e Responsabilidade Social da Amazônia - IIRES da Amazônia',
-        url: 'https://iires.org',
-        logo: '/brand/patterns/iires-logo.png',
-      },
-      {
-        name: 'Instituto Filadélfia',
-        url: 'https://www.institutofiladelfia.org',
-        logo: '/brand/patterns/filadelfia-logo.png',
+        name: 'Instituto Povo do Mar (IPOM)',
+        url: 'https://institutopovodomar.org.br',
+        logo: '/brand/patterns/ipom-logo.svg',
       },
     ],
     message:
