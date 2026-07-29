@@ -22,7 +22,8 @@ import { Separator } from '@/components/ui/separator'
 import { BrandLogo } from '@/components/brand/brand-logo'
 import { ConnectionPattern } from '@/components/brand/connection-pattern'
 import { Hexagon } from '@/components/brand/hexagon'
-import { findCredentialBySlug, type CivicCredential } from '@/data/credentials'
+import { type CivicCredential } from '@/data/credentials'
+import { useCredential } from '@/hooks/useCredential'
 import { cn } from '@/lib/utils'
 
 const validationItems = [
@@ -362,7 +363,7 @@ function CredentialNotFound() {
 }
 
 export function CredentialPage({ slug }: { slug: string }) {
-  const credential = findCredentialBySlug(slug)
+  const { credential, onChainStatus, loading: credentialLoading } = useCredential(slug)
   const [isVerifying, setIsVerifying] = useState(false)
   const [statusMessage, setStatusMessage] = useState('')
   const [isDidVisible, setIsDidVisible] = useState(false)
@@ -379,6 +380,19 @@ export function CredentialPage({ slug }: { slug: string }) {
       }
     }
   }, [])
+
+  if (credentialLoading) {
+    return (
+      <section className="flex min-h-[60vh] items-center justify-center">
+        <div className="flex flex-col items-center gap-4 text-center">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-elociv-navy/20 border-t-elociv-navy" />
+          <p className="text-sm font-semibold text-muted-foreground">
+            Verificando credencial…
+          </p>
+        </div>
+      </section>
+    )
+  }
 
   if (!credential) {
     return <CredentialNotFound />
@@ -740,10 +754,23 @@ export function CredentialPage({ slug }: { slug: string }) {
                       <DetailPair label="Ambiente" value={credential.proof.environment} />
                       <DetailPair label="Rede" value={credential.proof.network} />
                     </dl>
-                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                      Os valores técnicos apresentados são fictícios e não
-                      correspondem a uma transação blockchain real.
-                    </p>
+                    {onChainStatus?.found ? (
+                      <div className="mt-5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-950 dark:text-emerald-200">
+                        <p className="font-bold flex items-center gap-2 text-emerald-700">
+                          <ShieldCheck className="h-5 w-5" />
+                          Prova On-Chain Confirmada no Smart Contract Soroban
+                        </p>
+                        <p className="mt-1 text-xs text-emerald-800/80">
+                          Status: {onChainStatus.is_revoked ? 'REVOGADA' : 'ATIVA'}  ·  Emissor On-Chain: {onChainStatus.issuer ? `${onChainStatus.issuer.slice(0, 8)}...${onChainStatus.issuer.slice(-8)}` : 'Custodiante EloCiv'}
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                        {import.meta.env.VITE_USE_MOCKS !== 'false'
+                          ? 'Os valores técnicos apresentados acima são demonstrativos do protótipo EloCiv.'
+                          : 'Credencial registrada no backend e vinculada ao contrato Soroban na Stellar Testnet.'}
+                      </p>
+                    )}
                   </div>
                 </details>
               </Card>

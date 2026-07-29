@@ -16,13 +16,11 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Container } from '@/components/ui/container'
 import {
-  mapTotals,
-  remoteOpportunityCategories,
-  stateOpportunityData,
   type MapOpportunityCategory,
   type MapOpportunityFrequency,
   type StateOpportunityData,
 } from '@/data/opportunity-map-data'
+import { useAnalytics } from '@/hooks/useAnalytics'
 import { cn } from '@/lib/utils'
 
 type FilterState = {
@@ -298,11 +296,13 @@ function FiltersPanel({
 }
 
 function BrazilHexMap({
+  stateOpportunityData,
   selectedUf,
   compatibleUfs,
   remoteMode,
   onSelect,
 }: {
+  stateOpportunityData: StateOpportunityData[]
   selectedUf: string
   compatibleUfs: Set<string>
   remoteMode: boolean
@@ -391,7 +391,13 @@ function BrazilHexMap({
   )
 }
 
-function RemotePanel() {
+function RemotePanel({
+  remoteOpportunityCategories,
+  mapTotals,
+}: {
+  remoteOpportunityCategories: { label: string; count: number }[]
+  mapTotals: { inPerson: number; remote: number; representedStates: string }
+}) {
   const maxCount = Math.max(
     ...remoteOpportunityCategories.map((category) => category.count),
   )
@@ -530,6 +536,7 @@ function TerritoryPanel({
 }
 
 export function OpportunitiesMapPage() {
+  const { stateData: stateOpportunityData, remoteCategories: remoteOpportunityCategories, totals: mapTotals } = useAnalytics()
   const [filters, setFilters] = useState<FilterState>(defaultFilters)
   const [selectedUf, setSelectedUf] = useState('')
   const mapRef = useRef<HTMLDivElement>(null)
@@ -546,7 +553,7 @@ export function OpportunitiesMapPage() {
 
   const compatibleStates = useMemo(
     () => stateOpportunityData.filter((state) => matchesFilters(state, filters)),
-    [filters],
+    [stateOpportunityData, filters],
   )
   const compatibleUfs = useMemo(
     () => new Set(compatibleStates.map((state) => state.uf)),
@@ -704,6 +711,7 @@ export function OpportunitiesMapPage() {
 
               <div className="flex justify-center overflow-hidden rounded-2xl bg-elociv-blue/10 p-2 sm:p-4">
                 <BrazilHexMap
+                  stateOpportunityData={stateOpportunityData}
                   selectedUf={selectedUf}
                   compatibleUfs={compatibleUfs}
                   remoteMode={remoteMode}
@@ -733,7 +741,10 @@ export function OpportunitiesMapPage() {
 
             <Card className="p-5 sm:p-6">
               {remoteMode ? (
-                <RemotePanel />
+                <RemotePanel
+                  remoteOpportunityCategories={remoteOpportunityCategories}
+                  mapTotals={mapTotals}
+                />
               ) : (
                 <TerritoryPanel selectedState={selectedState} />
               )}

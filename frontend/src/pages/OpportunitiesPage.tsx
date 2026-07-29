@@ -26,7 +26,6 @@ import { Card } from '@/components/ui/card'
 import { Container } from '@/components/ui/container'
 import { cn } from '@/lib/utils'
 import {
-  opportunities,
   opportunityAgeRanges,
   opportunityCategories,
   opportunityModalities,
@@ -35,6 +34,7 @@ import {
   type OpportunityCategory,
   type OpportunityVisualVariant,
 } from '@/data/opportunities'
+import { useOpportunities } from '@/hooks/useOpportunities'
 
 const visualVariantClasses: Record<OpportunityVisualVariant, string> = {
   blue: 'bg-elociv-blue/35 text-elociv-navy',
@@ -104,10 +104,8 @@ function getInitialStateFilter() {
     return ''
   }
 
-  return (
-    opportunities.find((opportunity) => opportunity.stateAbbreviation === uf)
-      ?.state ?? ''
-  )
+  // Mapeia UF para nome de estado usando a lista estática
+  return opportunityStates.find((s) => s.slice(0, 2).toUpperCase() === uf) ?? ''
 }
 
 function getInitialModalityFilter() {
@@ -289,6 +287,7 @@ function OpportunityCard({ opportunity }: { opportunity: Opportunity }) {
 }
 
 export function OpportunitiesPage() {
+  const { data: opportunities, loading: opportunitiesLoading } = useOpportunities()
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
   const [modality, setModality] = useState(getInitialModalityFilter)
@@ -341,7 +340,7 @@ export function OpportunitiesPage() {
         matchesAgeRange
       )
     })
-  }, [ageRange, category, modality, search, state])
+  }, [opportunities, ageRange, category, modality, search, state])
 
   const resultCountLabel = `${filteredOpportunities.length} ${
     filteredOpportunities.length === 1
@@ -526,7 +525,17 @@ export function OpportunitiesPage() {
             )}
           </div>
 
-          {filteredOpportunities.length > 0 ? (
+          {opportunitiesLoading ? (
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-80 animate-pulse rounded-2xl bg-elociv-navy/5"
+                  aria-hidden="true"
+                />
+              ))}
+            </div>
+          ) : filteredOpportunities.length > 0 ? (
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
               {filteredOpportunities.map((opportunity) => (
                 <OpportunityCard
@@ -730,8 +739,8 @@ function InfoRow({
   )
 }
 
-function getRelatedOpportunities(currentOpportunity: Opportunity) {
-  return opportunities
+function getRelatedOpportunities(allOpportunities: Opportunity[], currentOpportunity: Opportunity) {
+  return allOpportunities
     .filter((opportunity) => opportunity.id !== currentOpportunity.id)
     .sort((first, second) => {
       const firstScore =
@@ -775,14 +784,15 @@ function OpportunityNotFound() {
 }
 
 export function OpportunityDetailPage({ slug }: { slug: string }) {
-  const opportunity = opportunities.find((item) => item.slug === slug)
+  const { data: allOpportunities } = useOpportunities()
+  const opportunity = allOpportunities.find((item) => item.slug === slug)
   const [interestShown, setInterestShown] = useState(false)
 
   if (!opportunity) {
     return <OpportunityNotFound />
   }
 
-  const relatedOpportunities = getRelatedOpportunities(opportunity)
+  const relatedOpportunities = getRelatedOpportunities(allOpportunities, opportunity)
 
   return (
     <>

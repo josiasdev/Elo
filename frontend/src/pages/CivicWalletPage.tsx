@@ -20,11 +20,11 @@ import { Card } from '@/components/ui/card'
 import { Container } from '@/components/ui/container'
 import { Separator } from '@/components/ui/separator'
 import {
-  credentials,
   type CivicCredential,
   type CredentialVisualVariant,
   type CredentialVisibility,
 } from '@/data/credentials'
+import { useWallet } from '@/hooks/useWallet'
 import { cn } from '@/lib/utils'
 
 const visualClasses: Record<CredentialVisualVariant, string> = {
@@ -299,14 +299,19 @@ function CredentialCard({
 }
 
 export function CivicWalletPage() {
+  const { credentials, loading: walletLoading } = useWallet()
   const [visibilityById, setVisibilityById] = useState<
     Record<string, CredentialVisibility>
-  >(() =>
-    Object.fromEntries(
-      credentials.map((credential) => [credential.id, credential.visibility]),
-    ),
-  )
+  >({})
   const [visibilityMessage, setVisibilityMessage] = useState('')
+
+  // Inicializa o mapa de visibilidade quando as credenciais carregam
+  const visibilityMap = useMemo(() => {
+    const initial = Object.fromEntries(
+      credentials.map((credential) => [credential.id, credential.visibility]),
+    )
+    return { ...initial, ...visibilityById }
+  }, [credentials, visibilityById])
 
   const summary = useMemo(() => {
     const validCredentials = credentials.filter(
@@ -327,7 +332,7 @@ export function CivicWalletPage() {
       issuers: issuers.size.toString(),
       ods: ods.size.toString(),
     }
-  }, [])
+  }, [credentials])
 
   const toggleVisibility = (credential: CivicCredential) => {
     setVisibilityById((current) => {
@@ -490,14 +495,22 @@ export function CivicWalletPage() {
           </div>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {credentials.map((credential) => (
-              <CredentialCard
-                key={credential.id}
-                credential={credential}
-                visibility={visibilityById[credential.id] ?? credential.visibility}
-                onToggleVisibility={() => toggleVisibility(credential)}
-              />
-            ))}
+            {walletLoading
+              ? Array.from({ length: 3 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-64 animate-pulse rounded-2xl bg-elociv-navy/5"
+                    aria-hidden="true"
+                  />
+                ))
+              : credentials.map((credential) => (
+                  <CredentialCard
+                    key={credential.id}
+                    credential={credential}
+                    visibility={visibilityMap[credential.id] ?? credential.visibility}
+                    onToggleVisibility={() => toggleVisibility(credential)}
+                  />
+                ))}
           </div>
         </Container>
       </section>
