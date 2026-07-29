@@ -10,10 +10,8 @@ import { PartnersSection } from '@/components/home/partners-section'
 import { TeamStrip } from '@/components/home/team-strip'
 import { FinalCtaSection } from '@/components/home/final-cta-section'
 import { SiteFooter } from '@/components/layout/site-footer'
-import {
-  OpportunitiesPage,
-  OpportunityDetailPlaceholder,
-} from '@/pages/OpportunitiesPage'
+import { opportunities } from '@/data/opportunities'
+import { OpportunitiesPage, OpportunityDetailPage } from '@/pages/OpportunitiesPage'
 
 type AppRoute =
   | { kind: 'home' }
@@ -76,9 +74,14 @@ export default function App() {
     }
 
     if (route.kind === 'opportunity-detail') {
-      document.title = 'Detalhes em construção — EloCiv'
+      const opportunity = opportunities.find((item) => item.slug === route.slug)
+
+      document.title = opportunity
+        ? `${opportunity.title} — EloCiv`
+        : 'Oportunidade não encontrada — EloCiv'
       setMetaDescription(
-        'Página temporária de detalhes de oportunidade da plataforma EloCiv.',
+        opportunity?.summary ??
+          'A oportunidade que você procura não está disponível ou o endereço informado está incorreto.',
       )
       return
     }
@@ -96,7 +99,7 @@ export default function App() {
         {route.kind === 'home' && <HomePage />}
         {route.kind === 'opportunities' && <OpportunitiesPage />}
         {route.kind === 'opportunity-detail' && (
-          <OpportunityDetailPlaceholder slug={route.slug} />
+          <OpportunityDetailPage slug={route.slug} />
         )}
       </main>
       <SiteFooter />
