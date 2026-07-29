@@ -8,7 +8,7 @@ Este guia descreve as instruções para preparar o ambiente de desenvolvimento, 
 
 1. **Node.js**: Versão v24.x instalada (verificada no ambiente: v24.14.1).
 2. **PostgreSQL**: Instância ativa do PostgreSQL rodando localmente ou via Docker (porta padrão `5432`).
-3. **Smart Contract de Deploy**: Instância do contrato `elociv-registry` deployado na Stellar Testnet (ver `docs/07-build-e-deploy.md`).
+3. **Smart Contract de Deploy**: Instância do contrato `elociv-registry` deployado na Stellar Testnet (ver `docs/smart-contract/07-build-e-deploy.md`).
 
 ---
 

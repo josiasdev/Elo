@@ -6,7 +6,7 @@ Este documento descreve o processo completo de compilação do contrato para Web
 
 ## Pré-requisitos
 
-Antes de iniciar, certifique-se de que o ambiente está configurado conforme descrito em `docs/05-ambiente-de-desenvolvimento.md`:
+Antes de iniciar, certifique-se de que o ambiente está configurado conforme descrito em `05-ambiente-de-desenvolvimento.md`:
 
 - Rust instalado com o target `wasm32-unknown-unknown`
 - Stellar CLI instalado e acessível no PATH
@@ -151,7 +151,7 @@ A saída deve conter uma indicação de erro com o código `1` (AlreadyInitializ
 
 ## Resumo das Variáveis de Ambiente
 
-Mantenha as seguintes variáveis definidas no seu ambiente ou em um arquivo `.env` para uso nos comandos de invocação documentados em `docs/08-comandos-cli-invoke.md`:
+Mantenha as seguintes variáveis definidas no seu ambiente ou em um arquivo `.env` para uso nos comandos de invocação documentados em `08-comandos-cli-invoke.md`:
 
 ```bash
 export ADMIN_ADDR=$(stellar keys address admin)

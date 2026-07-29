@@ -11,7 +11,7 @@ export ADMIN_ADDR=$(stellar keys address admin)
 export CONTRACT_ID=<CONTRACT_ID retornado pelo deploy>
 ```
 
-Consulte `docs/07-build-e-deploy.md` para obter esses valores.
+Consulte `07-build-e-deploy.md` para obter esses valores.
 
 ---
 

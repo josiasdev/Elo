@@ -87,7 +87,7 @@ Contém a struct `EloCivContract` anotada com `#[contract]` e seu bloco `#[contr
 - `revoke_credential`
 - `transfer_admin`
 
-Cada função delega as operações de storage para o módulo `storage` e emite eventos via `env.events().publish(...)`. Consulte `docs/02-smart-contract.md` para a documentação detalhada de cada função.
+Cada função delega as operações de storage para o módulo `storage` e emite eventos via `env.events().publish(...)`. Consulte `02-smart-contract.md` para a documentação detalhada de cada função.
 
 ### `types.rs` — Tipos de Dados
 
@@ -101,16 +101,16 @@ pub struct Credential {
 }
 ```
 
-A anotação `#[contracttype]` instrui o Soroban SDK a serializar e desserializar automaticamente esse tipo no formato XDR compatível com a blockchain. Consulte `docs/03-storage-e-dados.md` para mais detalhes.
+A anotação `#[contracttype]` instrui o Soroban SDK a serializar e desserializar automaticamente esse tipo no formato XDR compatível com a blockchain. Consulte `03-storage-e-dados.md` para mais detalhes.
 
 ### `storage.rs` — Camada de Persistência
 
-Encapsula toda a comunicação com o storage da Stellar. Separa claramente as operações de Instance Storage (para o endereço do admin) e Persistent Storage (para as credenciais). Também define as constantes de TTL (time-to-live) para cada tipo de dado. Consulte `docs/03-storage-e-dados.md`.
+Encapsula toda a comunicação com o storage da Stellar. Separa claramente as operações de Instance Storage (para o endereço do admin) e Persistent Storage (para as credenciais). Também define as constantes de TTL (time-to-live) para cada tipo de dado. Consulte `03-storage-e-dados.md`.
 
 ### `errors.rs` — Erros do Contrato
 
-Define o enum `ContractError` com todos os erros que as funções do contrato podem retornar. A anotação `#[contracterror]` faz com que cada variante seja convertida para um código numérico `u32` que trafega na resposta da transação. Consulte `docs/04-erros.md`.
+Define o enum `ContractError` com todos os erros que as funções do contrato podem retornar. A anotação `#[contracterror]` faz com que cada variante seja convertida para um código numérico `u32` que trafega na resposta da transação. Consulte `04-erros.md`.
 
 ### `test.rs` — Testes Unitários
 
-Contém seis funções de teste que verificam o comportamento esperado do contrato usando o ambiente de simulação do Soroban SDK. Consulte `docs/06-testes.md` para a descrição detalhada de cada teste.
+Contém seis funções de teste que verificam o comportamento esperado do contrato usando o ambiente de simulação do Soroban SDK. Consulte `06-testes.md` para a descrição detalhada de cada teste.
