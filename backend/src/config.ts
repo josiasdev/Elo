@@ -31,6 +31,14 @@ const envSchema = z.object({
 })
 
 function loadConfig() {
+  if (typeof process.loadEnvFile === 'function') {
+    try {
+      process.loadEnvFile()
+    } catch {
+      // Ignora se .env não existir em disco
+    }
+  }
+
   const result = envSchema.safeParse(process.env)
 
   if (!result.success) {
