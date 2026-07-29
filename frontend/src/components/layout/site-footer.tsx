@@ -25,6 +25,9 @@ function InstagramIcon() {
 
 export function SiteFooter() {
   const { footer } = homeContent
+  const isHomePage = window.location.pathname === '/'
+  const getNavigationHref = (href: string) =>
+    href.startsWith('#') && !isHomePage ? `/${href}` : href
 
   return (
     <footer className="relative bg-elociv-navy text-elociv-ivory overflow-hidden pt-14 pb-12 border-t border-elociv-navy/30">
@@ -41,7 +44,7 @@ export function SiteFooter() {
           {/* Logo e Resumo Institucional */}
           <div className="flex flex-col gap-4 md:col-span-2 max-w-sm">
             <div>
-              <BrandLogo variant="negative" size="md" />
+              <BrandLogo variant="negative" size="lg" />
             </div>
             <p className="text-sm text-elociv-ivory/75 leading-relaxed font-sans">
               {footer.brandDescription}
@@ -57,8 +60,12 @@ export function SiteFooter() {
               {footer.links.map((link) => (
                 <li key={link.href}>
                   <a
-                    href={link.href}
-                    onClick={(e) => scrollToAnchor(e, link.href)}
+                    href={getNavigationHref(link.href)}
+                    onClick={(e) => {
+                      if (isHomePage) {
+                        scrollToAnchor(e, link.href)
+                      }
+                    }}
                     className="inline-block py-1 text-elociv-ivory/85 hover:text-elociv-yellow transition-colors cursor-pointer"
                   >
                     {link.label}

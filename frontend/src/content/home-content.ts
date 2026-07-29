@@ -10,8 +10,8 @@ export const homeContent = {
       { label: 'Parceiros', href: '#parceiros' },
     ],
     cta: {
-      label: 'Conheça a solução',
-      href: '#solucao',
+      label: 'Conhecer a solução',
+      href: '/oportunidades',
     },
   },
   hero: {
