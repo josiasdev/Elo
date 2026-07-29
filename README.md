@@ -1,130 +1,161 @@
-# ELO 🔗
+# EloCiv — O Elo da Cidadania Jovem
 
-**Um elo entre jovens, ONGs e o futuro da participação juvenil.**
-*Projeto desenvolvido para o UNICEF Youth Challenge Blockchain 2026.*
+## Sobre o desafio
+Projeto oficial submetido ao desafio **UNICEF Youth Challenge Blockchain 2026**.
 
----
-
-## 🌍 Sobre o Projeto
-
-O **ELO** é uma plataforma digital projetada para criar um "currículo cívico" contínuo para jovens, conectando-os às oportunidades de seus territórios. 
-
-Através da tecnologia blockchain, resolvemos o problema da fragmentação de históricos: a plataforma garante a portabilidade e a integridade da participação juvenil (cursos, ativismo, oficinas) sem depender da sobrevivência institucional de uma ONG específica. Como efeito colateral positivo, o ELO gera um mapa de dados públicos que evidencia os **"desertos de oportunidade"**, auxiliando o direcionamento assertivo de políticas públicas e financiamentos sociais.
+## Objetivo
+Construir uma solução descentralizada baseada em blockchain capaz de registrar, validar e certificar a participação e a trajetória cívica de jovens em todo o Brasil através de Credenciais Verificáveis W3C e ancoragem de hashes criptográficos em Smart Contracts Soroban na rede Stellar.
 
 ---
 
-## 💻 Stack Tecnológico
+## O Problema e a Solução
 
-A escolha das tecnologias foca em agilidade para prototipagem rápida e base sólida para escalabilidade futura:
+### Problemática
+A participação de jovens em projetos sociais, ativismo, oficinas e formações complementares sofre com três grandes gargalos estruturais:
 
-*   **Front-end:** React.js + Vite, TypeScript, Tailwind CSS (Design) e `ethers.js` (Integração Web3).
-*   **Back-end:** Node.js (Express / Fastify).
-*   **Blockchain:** Solidity (Deploy na rede Ethereum Sepolia Testnet).
-*   **Segurança:** Biblioteca `crypto` (Node.js) para geração de hashes únicos off-chain.
+- **Invisibilidade e Fragmentação de Histórico:** As experiências e certificações obtidas pelos jovens ficam dispersas em arquivos locais ou sistemas isolados de ONGs. Quando uma instituição encerra suas atividades ou altera seus sistemas, o histórico do jovem é perdido.
+- **Desertos de Oportunidades:** Governos, ONGs e financiadores sociais não possuem mapas geolocalizados de densidade de oportunidades e cobertura de ODS, dificultando a identificação de territórios periféricos negligenciados.
+- **Privacidade do Menor (LGPD / ECA):** Armazenar dados pessoais de crianças e adolescentes diretamente em redes públicas de blockchain violaria legislações de proteção a menores.
 
----
+### Solução
+Desenvolvemos uma **plataforma Web3 descentralizada com abordagem *Privacy-by-Design*** que constrói o "currículo cívico" do jovem, estruturada em três pilares:
 
-## 🚀 Funcionalidades (Escopo do MVP)
-
-O protótipo foi construído focado na demonstração de viabilidade técnica das seguintes frentes:
-
-### 📍 Módulo 1: Mapa e Densidade de Oportunidades
-*   **Visualização do Mapa (RF01):** Interface interativa exibindo pinos geolocalizados das ONGs e grupos parceiros.
-*   **Indicador de Densidade (RF02):** Visualização comparativa de oportunidades entre bairros/cidades para identificar áreas negligenciadas.
-
-### 👤 Módulo 2: Perfil e Currículo Cívico
-*   **Linha do Tempo do Jovem (RF03):** Interface cronológica que lista todas as atividades e cursos certificados do usuário.
-*   **Detalhes da Credencial (RF04):** Exibição dos metadados da participação com leitura de status de verificação on-chain e portabilidade garantida.
-
-### 🔐 Módulo 3: Emissão e Registro em Blockchain
-*   **Cadastro de Atividade (RF05):** Rota de back-end para as ONGs parceiras cadastrarem a participação real dos jovens.
-*   **Privacidade e Ancoragem (RF06):** Para garantir a privacidade do menor, **nenhum dado pessoal vai para a rede pública**. O sistema gera um hash criptográfico dos dados da credencial e envia apenas este resumo para ancoragem e carimbo de tempo (timestamp) via Smart Contract.
+- **Ancoragem On-Chain em Soroban (Stellar):** O backend gera a credencial no formato padrão W3C Verifiable Credentials, calcula o resumo criptográfico (hash SHA-256) e envia para ancoragem imutável no contrato inteligente `elociv-registry`. Nenhum dado pessoal vai para a blockchain.
+- **Carteira Cívica Portátil:** O jovem é o único detentor do seu histórico cívico, podendo escolher quais credenciais tornar públicas ou manter privadas ao apresentar seu currículo para oportunidades futuras.
+- **Mapeamento Territorial e Cobertura de ODS:** Visualização geográfica pública da oferta de oportunidades por município e estado, evidenciando lacunas de ODS para direcionamento assertivo de investimentos sociais.
 
 ---
 
-## 🛠️ Como Executar o Protótipo Localmente
+## Links e Documentação
 
-Siga os passos abaixo para testar a aplicação em ambiente de desenvolvimento.
+- **Documentação Técnica Completa:** [docs/README.md](docs/README.md)
+- **Documentação do Smart Contract (Soroban/Rust):** [docs/smart-contract/README.md](docs/smart-contract/README.md)
+- **Documentação do Backend (APIs & Schema):** [docs/backend/README.md](docs/backend/README.md)
 
-### Pré-requisitos
-*   [Node.js](https://nodejs.org/) (v18 ou superior)
-*   Extensão da carteira [MetaMask](https://metamask.io/) configurada para a rede **Sepolia Testnet**.
+### Demonstração funcional
+O fluxo principal é orquestrado através de 3 módulos:
+1. **Oportunidades & Mapa Territorial:** Descoberta de oportunidades presenciais e remotas por município/estado com filtros por ODS, categoria e faixa etária.
+2. **Painel da Instituição & Emissão:** Organizações verificadas registram a conclusão da participação juvenil e emitem credenciais verificáveis.
+3. **Carteira Cívica & Verificação On-Chain:** Visualização da linha do tempo do jovem e validação em tempo real da prova criptográfica de existência e status no Smart Contract Soroban.
 
-### Instalação
+### Smart Contracts Deployados (Stellar Testnet)
+- **`elociv-registry` (Soroban / Rust):** [`CAPDGWHKOYYG2VON7NOQHOEQSHNLMJQ2KKDCD6CN7V72323GCUJVMGRH`](https://stellar.expert/explorer/testnet/contract/CAPDGWHKOYYG2VON7NOQHOEQSHNLMJQ2KKDCD6CN7V72323GCUJVMGRH)
 
-1. Clone este repositório:
-   ```bash
-   git clone git@github.com:josiasdev/Elo.git
-   ```
-2. Acesse a pasta do projeto:
-   ```bash
-   cd Elo
-   ```
-3. Instale as dependências:
-   ```bash
-   npm install
-   ```
+---
 
-4. Inicie o servidor de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
+## Exemplos de aplicação no projeto
+- Portabilidade e autonomia da trajetória cívica do jovem.
+- Registro imutável e à prova de fraude de cursos, oficinas, voluntariado e ativismo juvenil.
+- Mapeamento público de "desertos de oportunidades" e cobertura de ODS para direcionamento de recursos sociais.
+- Preservação estrita da privacidade de menores (*Privacy-by-Design* com hashing SHA-256 off-chain).
 
+---
 
+## Tecnologias utilizadas
+- **Smart Contracts:** Rust, Soroban SDK (Stellar), Stellar CLI.
+- **Rede Blockchain:** Stellar Testnet (Soroban RPC).
+- **Backend:** Node.js, Fastify, TypeScript, Prisma ORM, PostgreSQL, `@stellar/stellar-sdk`.
+- **Frontend Web:** React 19, TypeScript, Vite, Tailwind CSS v4, Lucide Icons.
+- **Containerização:** Docker, Docker Compose.
 
-## 📄 Estrutura do Smart Contract
-O contrato inteligente do ELO foi desenhado com foco no minimalismo e na redução de custos de transação (Gas fees). Ele contém apenas o necessário para gravar o hash emitido pelo back-end na blockchain, atrelando-o à chave pública (wallet) do emissor e salvando a data exata da emissão.
+---
 
-Endereço do Contrato na Sepolia: (Adicionar o endereço hash aqui após o deploy)
+## Estrutura do Repositório
+- `/contracts`: Código-fonte dos Smart Contracts em Rust (`elociv-registry`)
+- `/backend`: API RESTful Node.js Fastify, schemas Prisma e serviço de integração Stellar
+- `/frontend`: Aplicação Web SPA React/Vite com cliente API e adaptadores
+- `/docs`: Documentação técnica completa do projeto
 
-## 📅 Road to 29/07
-- [x] Definição de Arquitetura e Stack
-- [ ] Setup e Deploy do Smart Contract na Sepolia
-- [ ] Construção do Back-end (APIs mockadas para ONGs do piloto)
-- [ ] Construção do Front-end (Mapa e Perfil do Jovem)
-- [ ] Integração E2E (Emissão de hash -> Gravação On-chain -> Leitura no Perfil)
+---
 
-"Transformando a participação invisível de hoje na oportunidade documentada de amanhã."
-Desenvolvido pela Equipe ELO para o UNICEF Youth Challenge Blockchain 2026.
+## Como executar
 
-## Frontend
-
-O frontend do EloCiv está localizado em `frontend/`.
-
-Stack utilizada nesta fundação:
-
-- React;
-- Vite;
-- TypeScript em modo estrito;
-- React Router;
-- Tailwind CSS;
-- Zod;
-- Vitest e React Testing Library;
-- ESLint e Prettier.
-
-Instalação:
+### Opção 1: Execução Completa via Docker Compose (Recomendado)
 
 ```bash
+# Na raiz do projeto, suba o PostgreSQL e o Backend:
+sudo docker compose up -d
+
+# Acesse a pasta do frontend e inicie a aplicação web:
 cd frontend
 npm install
-```
-
-Executar em desenvolvimento:
-
-```bash
 npm run dev
 ```
 
-Executar testes:
+### Opção 2: Execução Manual em Desenvolvimento
 
+#### 1. Backend e Banco de Dados
 ```bash
-npm run test
+# Na pasta backend:
+cd backend
+
+# Instalar dependências
+npm install
+
+# Executar migrações do banco e seed inicial (IBGE e ONGs)
+npx prisma migrate dev
+npm run db:seed
+
+# Iniciar o servidor backend Fastify
+npm run dev
 ```
 
-Gerar build:
-
+#### 2. Frontend
 ```bash
-npm run build
+# Em outro terminal, na pasta frontend:
+cd frontend
+
+# Instalar dependências
+npm install
+
+# Iniciar a aplicação web
+npm run dev
 ```
 
-Nesta etapa, os dados exibidos pelo frontend são mockados e fictícios. Backend e blockchain estão sendo desenvolvidos separadamente; o frontend está preparado para futura integração com uma API REST e não realiza integração direta com blockchain, assinatura de transações ou armazenamento de chaves privadas.
+#### 3. Smart Contract (Compilação e Testes Rust)
+```bash
+# Na pasta do contrato:
+cd contracts/elociv-registry
+
+# Executar a suíte de testes unitários e de simulação
+cargo test
+
+# Compilar para WebAssembly (Wasm)
+cargo build --target wasm32-unknown-unknown --release
+```
+
+---
+
+## Requisitos mínimos do desafio
+- **Uso de blockchain:** Sim (Ancoragem de credenciais e verificação em tempo real via Soroban SDK na Stellar Testnet).
+- **Registro auditável:** Sim (Hashes SHA-256 e carimbos de tempo imutáveis e verificáveis no ledger Stellar).
+- **Smart contract funcional:** Sim (Suíte de 6 testes unitários e de simulação passando cleanly).
+- **Histórico verificável:** Sim (Página `/credenciais/:id` com consulta em tempo real ao contrato Soroban).
+- **Docker configurado:** Sim (Dockerfile multi-estágio e `docker-compose.yml`).
+- **README funcional:** Sim.
+
+---
+
+## Declaração de Uso de Inteligência Artificial (IA)
+
+Em conformidade com as diretrizes do desafio, declaramos que ferramentas de IA generativa foram utilizadas estritamente em papel de apoio ao desenvolvimento do projeto, mantendo a autoria intelectual e supervisão técnica totalmente centralizadas na equipe.
+
+### Ferramentas Utilizadas
+- **Modelos:** Google Gemini, OpenAI ChatGPT, Anthropic Claude.
+
+### Escopo de Aplicação
+1. **Concepção:** Brainstorm inicial de ideias, validação de regras de negócio e refinamento da proposta de valor do EloCiv.
+2. **Qualidade e Segurança do Código:** Auxílio na revisão de código, refatoração de adaptadores de tipo e padronização do contrato inteligente Soroban.
+3. **Documentação:** Apoio na estruturação lógica, revisão ortográfica e padronização da documentação técnica e deste arquivo README.
+4. **Design e Interface:** Auxílio na construção de componentes acessíveis e responsivos no frontend React.
+
+*> **OBS:** Toda a arquitetura do ecossistema de smart contracts Soroban, integração backend/blockchain e lógica de credenciais verificáveis foi desenvolvida, revisada e é perfeitamente compreendida e explicável pelos integrantes do time.*
+
+---
+
+## Equipe
+
+| Membro | Foco |
+|---|---|
+| <img src="https://github.com/josiasdev.png" width="50" style="border-radius:50%"/><br/>**[Josias](https://github.com/josiasdev)** | Desenvolvimento, Backend, Smart Contracts e Arquitetura |
+| <img src="https://github.com/timoteobentes.png" width="50" style="border-radius:50%"/><br/>**[Timóteo](https://github.com/timoteobentes)** | Desenvolvimento, Frontend, interface |
