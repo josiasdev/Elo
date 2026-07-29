@@ -1,0 +1,135 @@
+@import 'tailwindcss';
+@import '@fontsource/league-spartan/600.css';
+@import '@fontsource/league-spartan/700.css';
+@import '@fontsource/nunito-sans/400.css';
+@import '@fontsource/nunito-sans/500.css';
+@import '@fontsource/nunito-sans/600.css';
+@import '@fontsource/nunito-sans/700.css';
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+
+  --color-elociv-yellow: var(--elociv-yellow);
+  --color-elociv-pink: var(--elociv-pink);
+  --color-elociv-blue: var(--elociv-blue);
+  --color-elociv-navy: var(--elociv-navy);
+  --color-elociv-plum: var(--elociv-plum);
+  --color-elociv-ivory: var(--elociv-ivory);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-heading: 'League Spartan', 'Sifonn', sans-serif;
+  --font-sans: 'Nunito Sans', 'DM Sans', sans-serif;
+}
+
+:root {
+  --background: 43 100% 98%;
+  --foreground: 222 29% 18%;
+
+  --card: 43 100% 98%;
+  --card-foreground: 222 29% 18%;
+
+  --primary: 222 29% 18%;
+  --primary-foreground: 43 100% 98%;
+
+  --secondary: 194 72% 75%;
+  --secondary-foreground: 222 29% 18%;
+
+  --accent: 49 86% 68%;
+  --accent-foreground: 222 29% 18%;
+
+  --muted: 194 35% 93%;
+  --muted-foreground: 222 15% 38%;
+
+  --border: 222 16% 82%;
+  --ring: 194 72% 60%;
+
+  --radius: 1rem;
+
+  --elociv-yellow: #f4dc67;
+  --elociv-pink: #eda9c2;
+  --elociv-blue: #8dd8f0;
+  --elociv-navy: #20283a;
+  --elociv-plum: #69475f;
+  --elociv-ivory: #fffdf7;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+  }
+  body {
+    overflow-x: hidden;
+  }
+  section[id],
+  div[id] {
+    scroll-margin-top: 5.5rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    color: var(--color-foreground);
+    font-weight: 700;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  .credential-print-hidden {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  .credential-print-surface {
+    box-shadow: none !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .credential-print-surface {
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,188 @@
+import { useEffect } from 'react'
+import { SiteHeader } from '@/components/layout/site-header'
+import { HeroSection } from '@/components/home/hero-section'
+import { ProblemSection } from '@/components/home/problem-section'
+import { SolutionSection } from '@/components/home/solution-section'
+import { DifferentialsSection } from '@/components/home/differentials-section'
+import { BlockchainSection } from '@/components/home/blockchain-section'
+import { ImpactSection } from '@/components/home/impact-section'
+import { PartnersSection } from '@/components/home/partners-section'
+import { TeamStrip } from '@/components/home/team-strip'
+import { FinalCtaSection } from '@/components/home/final-cta-section'
+import { SiteFooter } from '@/components/layout/site-footer'
+import { opportunities } from '@/data/opportunities'
+import { OpportunitiesPage, OpportunityDetailPage } from '@/pages/OpportunitiesPage'
+import { CredentialPage } from '@/pages/CredentialPage'
+import { CivicWalletPage } from '@/pages/CivicWalletPage'
+import { OpportunitiesMapPage } from '@/pages/OpportunitiesMapPage'
+
+type AppRoute =
+  | { kind: 'home' }
+  | { kind: 'opportunities' }
+  | { kind: 'opportunities-map' }
+  | { kind: 'civic-wallet' }
+  | { kind: 'opportunity-detail'; slug: string }
+  | { kind: 'credential-detail'; slug: string }
+
+function getCurrentRoute(): AppRoute {
+  const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
+
+  if (pathname === '/oportunidades') {
+    return { kind: 'opportunities' }
+  }
+
+  if (pathname === '/oportunidades/mapa') {
+    return { kind: 'opportunities-map' }
+  }
+
+  if (pathname === '/carteira-civica') {
+    return { kind: 'civic-wallet' }
+  }
+
+  if (pathname.startsWith('/oportunidades/')) {
+    const slug = decodeURIComponent(pathname.replace('/oportunidades/', ''))
+    return { kind: 'opportunity-detail', slug }
+  }
+
+  if (pathname.startsWith('/credenciais/')) {
+    const slug = decodeURIComponent(pathname.replace('/credenciais/', ''))
+    return { kind: 'credential-detail', slug }
+  }
+
+  return { kind: 'home' }
+}
+
+function setMetaDescription(content: string) {
+  let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]')
+
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.name = 'description'
+    document.head.appendChild(meta)
+  }
+
+  meta.content = content
+}
+
+function HomePage() {
+  return (
+    <>
+      <HeroSection />
+      <ProblemSection />
+      <SolutionSection />
+      <DifferentialsSection />
+      <BlockchainSection />
+      <ImpactSection />
+      <PartnersSection />
+      <TeamStrip />
+      <FinalCtaSection />
+    </>
+  )
+}
+
+export default function App() {
+  const route = getCurrentRoute()
+
+  useEffect(() => {
+    if (route.kind !== 'home' || !window.location.hash) {
+      return
+    }
+
+    const targetId = decodeURIComponent(window.location.hash.replace(/^#/, ''))
+
+    const animationFrame = window.requestAnimationFrame(() => {
+      const target = document.getElementById(targetId)
+
+      if (!target) {
+        return
+      }
+
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches
+
+      target.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start',
+      })
+      window.history.replaceState(
+        null,
+        '',
+        window.location.pathname + window.location.search,
+      )
+    })
+
+    return () => window.cancelAnimationFrame(animationFrame)
+  }, [route.kind])
+
+  useEffect(() => {
+    if (route.kind === 'opportunities') {
+      document.title = 'Oportunidades — EloCiv'
+      setMetaDescription(
+        'Explore cursos, oficinas, mentorias, voluntariado e ações comunitárias para jovens na plataforma EloCiv.',
+      )
+      return
+    }
+
+    if (route.kind === 'opportunities-map') {
+      document.title = 'Mapa de Oportunidades — EloCiv'
+      setMetaDescription(
+        'Explore oportunidades presenciais e remotas em uma visualização territorial demonstrativa da plataforma EloCiv.',
+      )
+      return
+    }
+
+    if (route.kind === 'opportunity-detail') {
+      const opportunity = opportunities.find((item) => item.slug === route.slug)
+
+      document.title = opportunity
+        ? `${opportunity.title} — EloCiv`
+        : 'Oportunidade não encontrada — EloCiv'
+      setMetaDescription(
+        opportunity?.summary ??
+          'A oportunidade que você procura não está disponível ou o endereço informado está incorreto.',
+      )
+      return
+    }
+
+    if (route.kind === 'civic-wallet') {
+      document.title = 'Carteira Cívica — EloCiv'
+      setMetaDescription(
+        'Visualização demonstrativa da trajetória cívica de uma jovem, reunindo credenciais verificáveis emitidas por instituições reconhecidas.',
+      )
+      return
+    }
+
+    if (route.kind === 'credential-detail') {
+      document.title = 'Credencial Cívica Verificável — EloCiv'
+      setMetaDescription(
+        'Visualização demonstrativa de uma credencial cívica emitida por uma instituição verificada na plataforma EloCiv.',
+      )
+      return
+    }
+
+    document.title = 'EloCiv — O elo da cidadania jovem'
+    setMetaDescription(
+      'Encontre oportunidades no seu território, registre sua participação e construa uma trajetória cívica segura, portátil e verificável.',
+    )
+  }, [route])
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-accent selection:text-accent-foreground">
+      <SiteHeader />
+      <main className="flex-1">
+        {route.kind === 'home' && <HomePage />}
+        {route.kind === 'opportunities' && <OpportunitiesPage />}
+        {route.kind === 'opportunities-map' && <OpportunitiesMapPage />}
+        {route.kind === 'civic-wallet' && <CivicWalletPage />}
+        {route.kind === 'opportunity-detail' && (
+          <OpportunityDetailPage slug={route.slug} />
+        )}
+        {route.kind === 'credential-detail' && (
+          <CredentialPage slug={route.slug} />
+        )}
+      </main>
+      <SiteFooter />
+    </div>
+  )
+}

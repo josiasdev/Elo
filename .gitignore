@@ -1,3 +1,19 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment variables & local configuration
+.env
+.env.local
+.env.*.local
+*.local
+
+# Node & Package Managers
 # Configuração de ambiente e dados sensíveis
 .env
 .env*.local
@@ -7,6 +23,41 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build outputs
+/dist
+/build
+dist-ssr
+*.tsbuildinfo
+frontend/screenshots/
+frontend/.chrome-shot*/
+frontend/.edge-shot*/
+
+# IDE, Editor & Agent workspace folders
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.agents/
+.gemini/
+frontend-rebuild/
+scratch/
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+
+# Logs and Caches
+logs/
+*.log
+.eslintcache
+.vite/
 dist/
 
 # Rust e compilação Soroban/Stellar

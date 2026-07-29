@@ -86,3 +86,45 @@ Endereço do Contrato na Sepolia: (Adicionar o endereço hash aqui após o deplo
 
 "Transformando a participação invisível de hoje na oportunidade documentada de amanhã."
 Desenvolvido pela Equipe ELO para o UNICEF Youth Challenge Blockchain 2026.
+
+## Frontend
+
+O frontend do EloCiv está localizado em `frontend/`.
+
+Stack utilizada nesta fundação:
+
+- React;
+- Vite;
+- TypeScript em modo estrito;
+- React Router;
+- Tailwind CSS;
+- Zod;
+- Vitest e React Testing Library;
+- ESLint e Prettier.
+
+Instalação:
+
+```bash
+cd frontend
+npm install
+```
+
+Executar em desenvolvimento:
+
+```bash
+npm run dev
+```
+
+Executar testes:
+
+```bash
+npm run test
+```
+
+Gerar build:
+
+```bash
+npm run build
+```
+
+Nesta etapa, os dados exibidos pelo frontend são mockados e fictícios. Backend e blockchain estão sendo desenvolvidos separadamente; o frontend está preparado para futura integração com uma API REST e não realiza integração direta com blockchain, assinatura de transações ou armazenamento de chaves privadas.
