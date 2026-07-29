@@ -1,6 +1,0 @@
-export { mockCredentials } from './data/credentials'
-export { mockInstitutions } from './data/institutions'
-export { mockOpportunities } from './data/opportunities'
-export { mockParticipations } from './data/participations'
-export { mockTerritories } from './data/territories'
-export { mockYouthProfiles } from './data/youthProfiles'

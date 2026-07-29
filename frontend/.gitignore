@@ -1,4 +1,4 @@
-# Logs
+# Logs & Caches
 logs
 *.log
 npm-debug.log*
@@ -6,17 +6,34 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.eslintcache
+.vite
+*.tsbuildinfo
 
+# Dependencies
 node_modules
+
+# Build & Production outputs
 dist
 dist-ssr
-*.local
+build
+screenshots
+.chrome-shot*
+.edge-shot*
 
-# Editor directories and files
+# Environment variables & Local overrides
+.env
+.env.local
+.env.*.local
+*.local
+!.env.example
+
+# Editor & System directories
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
