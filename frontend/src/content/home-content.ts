@@ -281,11 +281,6 @@ export const homeContent = {
         url: 'https://interactbrasil.org.br',
         logo: '/brand/patterns/interact-logo.png',
       },
-      {
-        name: 'Instituto Povo do Mar (IPOM)',
-        url: 'https://institutopovodomar.org.br',
-        logo: '/brand/patterns/ipom-logo.svg',
-      },
     ],
     message:
       'Essas conexões apoiam a construção, articulação e validação do ecossistema inicial do EloCiv.',
