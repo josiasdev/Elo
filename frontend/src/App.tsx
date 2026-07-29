@@ -12,11 +12,15 @@ import { FinalCtaSection } from '@/components/home/final-cta-section'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { opportunities } from '@/data/opportunities'
 import { OpportunitiesPage, OpportunityDetailPage } from '@/pages/OpportunitiesPage'
+import { CredentialPage } from '@/pages/CredentialPage'
+import { CivicWalletPage } from '@/pages/CivicWalletPage'
 
 type AppRoute =
   | { kind: 'home' }
   | { kind: 'opportunities' }
+  | { kind: 'civic-wallet' }
   | { kind: 'opportunity-detail'; slug: string }
+  | { kind: 'credential-detail'; slug: string }
 
 function getCurrentRoute(): AppRoute {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
@@ -25,9 +29,18 @@ function getCurrentRoute(): AppRoute {
     return { kind: 'opportunities' }
   }
 
+  if (pathname === '/carteira-civica') {
+    return { kind: 'civic-wallet' }
+  }
+
   if (pathname.startsWith('/oportunidades/')) {
     const slug = decodeURIComponent(pathname.replace('/oportunidades/', ''))
     return { kind: 'opportunity-detail', slug }
+  }
+
+  if (pathname.startsWith('/credenciais/')) {
+    const slug = decodeURIComponent(pathname.replace('/credenciais/', ''))
+    return { kind: 'credential-detail', slug }
   }
 
   return { kind: 'home' }
@@ -86,6 +99,22 @@ export default function App() {
       return
     }
 
+    if (route.kind === 'civic-wallet') {
+      document.title = 'Carteira Cívica — EloCiv'
+      setMetaDescription(
+        'Visualização demonstrativa da trajetória cívica de uma jovem, reunindo credenciais verificáveis emitidas por instituições reconhecidas.',
+      )
+      return
+    }
+
+    if (route.kind === 'credential-detail') {
+      document.title = 'Credencial Cívica Verificável — EloCiv'
+      setMetaDescription(
+        'Visualização demonstrativa de uma credencial cívica emitida por uma instituição verificada na plataforma EloCiv.',
+      )
+      return
+    }
+
     document.title = 'EloCiv — O elo da cidadania jovem'
     setMetaDescription(
       'Encontre oportunidades no seu território, registre sua participação e construa uma trajetória cívica segura, portátil e verificável.',
@@ -98,8 +127,12 @@ export default function App() {
       <main className="flex-1">
         {route.kind === 'home' && <HomePage />}
         {route.kind === 'opportunities' && <OpportunitiesPage />}
+        {route.kind === 'civic-wallet' && <CivicWalletPage />}
         {route.kind === 'opportunity-detail' && (
           <OpportunityDetailPage slug={route.slug} />
+        )}
+        {route.kind === 'credential-detail' && (
+          <CredentialPage slug={route.slug} />
         )}
       </main>
       <SiteFooter />

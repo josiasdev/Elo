@@ -111,3 +111,25 @@
     scroll-behavior: auto !important;
   }
 }
+
+@media print {
+  header,
+  footer,
+  .credential-print-hidden {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  .credential-print-surface {
+    box-shadow: none !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .credential-print-surface {
+    break-inside: avoid;
+  }
+}

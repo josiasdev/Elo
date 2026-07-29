@@ -8,7 +8,7 @@ EloCiv
 
 Título: "O território já tem oportunidades"
 
-Subtítulo: "A EloCiv ajuda você a encontrá-las"
+Subtítulo: "O EloCiv ajuda você a encontrá-las"
 
 ## Essência
 

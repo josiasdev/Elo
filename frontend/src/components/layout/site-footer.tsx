@@ -78,7 +78,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noreferrer"
               className="mt-2 inline-flex w-fit items-center gap-2 rounded-xl border border-elociv-ivory/20 px-3 py-2 text-sm font-bold text-elociv-ivory/85 transition-colors hover:border-elociv-yellow/60 hover:text-elociv-yellow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-elociv-yellow"
-              aria-label="Abrir Instagram da EloCiv em nova aba"
+              aria-label="Abrir Instagram do EloCiv em nova aba"
             >
               <InstagramIcon />
               <span>{footer.social.label}</span>

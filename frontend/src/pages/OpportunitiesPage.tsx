@@ -527,12 +527,12 @@ const opportunityFaqs = [
   {
     question: 'Como faço para participar?',
     answer:
-      'Clique em "Demonstrar interesse". Na versão final, a EloCiv direcionará você ao canal oficial da instituição responsável pela inscrição.',
+      'Clique em "Demonstrar interesse". Na versão final, o EloCiv direcionará você ao canal oficial da instituição responsável pela inscrição.',
   },
   {
-    question: 'A EloCiv realiza a seleção dos participantes?',
+    question: 'O EloCiv realiza a seleção dos participantes?',
     answer:
-      'Não. Cada organização define seus próprios critérios, prazos e processo de seleção. A EloCiv facilita a descoberta da oportunidade e o encaminhamento.',
+      'Não. Cada organização define seus próprios critérios, prazos e processo de seleção. O EloCiv facilita a descoberta da oportunidade e o encaminhamento.',
   },
   {
     question: 'Receberei uma credencial após participar?',
@@ -871,6 +871,20 @@ export function OpportunityDetailPage({ slug }: { slug: string }) {
                       blockchain.
                     </p>
                   </div>
+                  {opportunity.slug === 'oficina-introducao-programacao' && (
+                    <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center">
+                      <a
+                        href="/credenciais/credencial-oficina-introducao-programacao"
+                        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-elociv-blue px-5 py-3 text-sm font-heading font-bold text-elociv-navy shadow-sm transition-colors hover:bg-elociv-blue/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-fit"
+                      >
+                        Visualizar exemplo de credencial
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      </a>
+                      <span className="text-xs font-semibold leading-relaxed text-elociv-ivory/65">
+                        Demonstração com dados fictícios.
+                      </span>
+                    </div>
+                  )}
                   <div className="mt-6 grid gap-4 md:grid-cols-3">
                     {credentialPoints.map((point) => (
                       <div
@@ -928,12 +942,12 @@ export function OpportunityDetailPage({ slug }: { slug: string }) {
                       Interesse demonstrado no protótipo
                     </p>
                     <p className="mt-2 leading-relaxed">
-                      Na versão final da EloCiv, você será direcionado ao canal
+                      Na versão final do EloCiv, você será direcionado ao canal
                       oficial da instituição responsável para continuar o processo
                       de inscrição.
                     </p>
                     <p className="mt-2 leading-relaxed">
-                      A EloCiv conecta você à oportunidade, mas a seleção e a
+                      O EloCiv conecta você à oportunidade, mas a seleção e a
                       inscrição continuam sob responsabilidade da organização.
                     </p>
                   </div>
@@ -993,7 +1007,7 @@ export function OpportunityDetailPage({ slug }: { slug: string }) {
                   <span>{opportunity.organization}</span>
                 </div>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  Organização demonstrativa cadastrada na EloCiv para publicar
+                  Organização demonstrativa cadastrada no EloCiv para publicar
                   oportunidades e reconhecer participações juvenis.
                 </p>
                 <p className="mt-3 text-xs font-semibold leading-relaxed text-muted-foreground">

@@ -16,7 +16,7 @@ export const homeContent = {
   },
   hero: {
     badge: 'O elo da cidadania jovem',
-    title: 'O território já tem oportunidades. A EloCiv ajuda você a encontrá-las.',
+    title: 'O território já tem oportunidades. O EloCiv ajuda você a encontrá-las.',
     description:
       'Descubra cursos, oficinas, voluntariado e ações comunitárias no seu território. Registre sua participação e construa uma trajetória cívica segura, portátil e verificável.',
     primaryCta: {
@@ -24,7 +24,7 @@ export const homeContent = {
       href: '#solucao',
     },
     secondaryCta: {
-      label: 'Conhecer a EloCiv',
+      label: 'Conhecer o EloCiv',
       href: '#problema',
     },
     stats: [
@@ -40,7 +40,7 @@ export const homeContent = {
     paragraphs: [
       'Todos os dias, adolescentes participam de oficinas, cursos, mentorias, projetos culturais, coletivos e ações voluntárias. Nessas experiências, desenvolvem habilidades, criam vínculos e transformam suas comunidades.',
       'Mas, quando um projeto termina, uma organização encerra suas atividades ou o jovem muda de território, grande parte dessa trajetória pode se perder. Ao mesmo tempo, localidades com poucas oportunidades continuam invisíveis porque essa ausência raramente se transforma em dado.',
-      'A EloCiv conecta essas duas necessidades: preserva o reconhecimento das experiências juvenis e torna visíveis os territórios que precisam de novas oportunidades.',
+      'O EloCiv conecta essas duas necessidades: preserva o reconhecimento das experiências juvenis e torna visíveis os territórios que precisam de novas oportunidades.',
     ],
     cards: [
       {
@@ -66,7 +66,7 @@ export const homeContent = {
     label: 'A solução',
     title: 'Um elo entre jovens, oportunidades e territórios.',
     description:
-      'A EloCiv cria uma jornada simples para o jovem e uma infraestrutura confiável para organizações que desejam divulgar oportunidades, reconhecer participações e transformar lacunas territoriais em evidências.',
+      'O EloCiv cria uma jornada simples para o jovem e uma infraestrutura confiável para organizações que desejam divulgar oportunidades, reconhecer participações e transformar lacunas territoriais em evidências.',
     steps: [
       {
         number: '01',
@@ -80,7 +80,7 @@ export const homeContent = {
         number: '02',
         title: 'Demonstre interesse',
         description:
-          'Escolha uma oportunidade e siga para o canal oficial da instituição responsável. A EloCiv não substitui o processo da organização.',
+          'Escolha uma oportunidade e siga para o canal oficial da instituição responsável. O EloCiv não substitui o processo da organização.',
         icon: 'MousePointerClick',
         collectiveResult: false,
       },
@@ -107,7 +107,7 @@ export const homeContent = {
     label: 'Diferenciais',
     title: 'Mais do que um catálogo de oportunidades.',
     description:
-      'A EloCiv conecta descoberta, participação, reconhecimento e inteligência territorial em uma única jornada, sem transformar adolescentes em produtos de dados.',
+      'O EloCiv conecta descoberta, participação, reconhecimento e inteligência territorial em uma única jornada, sem transformar adolescentes em produtos de dados.',
     items: [
       {
         title: 'Carteira cívica portátil',
@@ -142,8 +142,8 @@ export const homeContent = {
     title:
       'Blockchain não é um carimbo. É a camada de confiança entre instituições independentes.',
     paragraphs: [
-      'Sem uma infraestrutura compartilhada, cada organização manteria seus próprios registros e o jovem dependeria da continuidade de cada banco de dados. A arquitetura da EloCiv distribui a confiança entre o jovem, as organizações emissoras e uma rede verificável.',
-      'A EloCiv está estruturando o piloto para que cada jovem possua um identificador descentralizado, com custódia assistida quando necessário, e para que organizações verificadas emitam credenciais assinadas com suas próprias chaves. Assim, nenhuma instituição - nem mesmo a EloCiv - concentra sozinha a autoridade sobre toda a trajetória.',
+      'Sem uma infraestrutura compartilhada, cada organização manteria seus próprios registros e o jovem dependeria da continuidade de cada banco de dados. A arquitetura do EloCiv distribui a confiança entre o jovem, as organizações emissoras e uma rede verificável.',
+      'O EloCiv está estruturando o piloto para que cada jovem possua um identificador descentralizado, com custódia assistida quando necessário, e para que organizações verificadas emitam credenciais assinadas com suas próprias chaves. Assim, nenhuma instituição - nem mesmo o EloCiv - concentra sozinha a autoridade sobre toda a trajetória.',
     ],
     pillars: [
       {
@@ -154,7 +154,7 @@ export const homeContent = {
       {
         title: 'Múltiplas âncoras de confiança',
         description:
-          'Cada organização verificada emite e assina suas próprias credenciais. A EloCiv coordena o ecossistema, mas não decide sozinha o que conta como participação válida.',
+          'Cada organização verificada emite e assina suas próprias credenciais. O EloCiv coordena o ecossistema, mas não decide sozinho o que conta como participação válida.',
       },
       {
         title: 'Reconhecimento que pertence ao jovem',
@@ -225,7 +225,7 @@ export const homeContent = {
     label: 'Impacto esperado',
     title: 'Reconhecer trajetórias também é ampliar oportunidades.',
     description:
-      'A EloCiv transforma participação juvenil em reconhecimento individual e desigualdade territorial em evidência coletiva.',
+      'O EloCiv transforma participação juvenil em reconhecimento individual e desigualdade territorial em evidência coletiva.',
     blocks: [
       {
         title: 'Para jovens',
@@ -254,7 +254,7 @@ export const homeContent = {
     label: 'Parceiros confirmados',
     title: 'Nenhum território se transforma sozinho.',
     description:
-      'A EloCiv cresce por meio da colaboração entre organizações comprometidas com juventude, educação, participação cidadã, inovação e desenvolvimento territorial.',
+      'O EloCiv cresce por meio da colaboração entre organizações comprometidas com juventude, educação, participação cidadã, inovação e desenvolvimento territorial.',
     items: [
       {
         name: 'Interact Brasil',
@@ -273,7 +273,7 @@ export const homeContent = {
       },
     ],
     message:
-      'Essas conexões apoiam a construção, articulação e validação do ecossistema inicial da EloCiv.',
+      'Essas conexões apoiam a construção, articulação e validação do ecossistema inicial do EloCiv.',
   },
   team: {
     title: 'Quem constrói o Elo',
@@ -317,7 +317,7 @@ export const homeContent = {
   finalCta: {
     title: 'Vamos conectar mais jovens às oportunidades do seu território?',
     description:
-      'A EloCiv transforma participação em reconhecimento, confiança entre instituições e ausência de oportunidades em evidência para ação.',
+      'O EloCiv transforma participação em reconhecimento, confiança entre instituições e ausência de oportunidades em evidência para ação.',
     primaryCta: {
       label: 'Voltar ao início',
       href: '#inicio',
@@ -339,7 +339,7 @@ export const homeContent = {
       { label: 'Parceiros', href: '#parceiros' },
     ],
     social: {
-      label: 'Instagram da EloCiv',
+      label: 'Instagram do EloCiv',
       href: 'https://www.instagram.com/elociv.br',
     },
     copyright: '© 2026 EloCiv. Todos os direitos reservados.',
