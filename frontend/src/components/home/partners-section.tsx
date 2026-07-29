@@ -23,25 +23,25 @@ export function PartnersSection() {
           />
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-6">
           {partners.items.map((partner) => (
             <Card
               key={partner.name}
               variant="default"
-              className="min-h-36 bg-background border-2 border-elociv-navy/15 p-0 transition-all hover:border-elociv-navy/40 hover:shadow-md"
+              className="min-h-48 bg-background border-2 border-elociv-navy/15 p-0 transition-all hover:border-elociv-navy/40 hover:shadow-lg"
             >
               <a
                 href={partner.url}
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-full min-h-36 flex-col items-center justify-center p-4 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="flex h-full min-h-48 flex-col items-center justify-center p-5 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 aria-label={`Abrir site de ${partner.name} em nova aba`}
               >
-                <div className="flex h-20 w-full items-center justify-center rounded-xl bg-elociv-ivory p-3">
+                <div className="flex h-28 sm:h-32 w-full items-center justify-center rounded-2xl bg-elociv-ivory p-4">
                   <img
                     src={partner.logo}
                     alt={`Logo ${partner.name}`}
-                    className="max-h-16 w-full object-contain"
+                    className="max-h-24 sm:max-h-28 w-full object-contain"
                     loading="lazy"
                   />
                 </div>

@@ -258,12 +258,12 @@ export const homeContent = {
     items: [
       {
         name: 'Shanti Brasil',
-        url: 'https://shantibrasil.org.br',
+        url: 'https://shantibrasil.com',
         logo: '/brand/patterns/shanti-logo.svg',
       },
       {
         name: 'TETO Brasil',
-        url: 'https://teto.org.br',
+        url: 'https://br.techo.org',
         logo: '/brand/patterns/teto-logo.svg',
       },
       {
