@@ -268,12 +268,12 @@ export const homeContent = {
       },
       {
         name: 'IIRes da Amazônia',
-        url: 'https://iiresamazonia.org.br',
+        url: 'https://iires.org',
         logo: '/brand/patterns/iires-logo.png',
       },
       {
         name: 'Instituto Filadélfia',
-        url: 'https://www.institutofiladelfia.org.br',
+        url: 'https://www.institutofiladelfia.org',
         logo: '/brand/patterns/filadelfia-logo.png',
       },
       {
